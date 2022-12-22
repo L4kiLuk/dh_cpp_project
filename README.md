@@ -1,5 +1,5 @@
 # dh_cpp_project
-The repository ofor the project from cpp. 
+The repository for the project from cpp. 
 ## Project Structure
 Spielfeld
     + Feld[][]:Spielstein - Pascal
