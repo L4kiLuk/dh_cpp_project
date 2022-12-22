@@ -2,20 +2,23 @@
 The repository ofor the project from cpp. 
 ## Project Structure
 Spielfeld
-    + Feld[][]:Spielstein
-    + move(from,to):bool
-    + hint(from):Ziele[]
-    + render()
-    + save(File)
-    + load(File)
+    + Feld[][]:Spielstein - Pascal
+    + move(from,to):bool - Pascal
+    + hint(from):Ziele[] - Pascal
 
-Spielstein
+Spielstein - Pascal
     + Zustand:bool
     + Schwarz:bool
+    + 
 Controler
-    + main():int
-    + saveHighscore(NameSpieler)
-    + loadHighscore():Highscores[] 
+    + saveHighscore(NameSpieler) - Lukas
+    + loadHighscore():Highscores[] - Lukas
+    + save(File) - Lukas
+    + load(File) - Lukas
+    + render() - Lukas
+    + 
 ComputerPlayer
- +nextmove()
+    + nextmove()
  
+ Main
+    + main():int - Lukas
