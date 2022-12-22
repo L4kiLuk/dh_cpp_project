@@ -13,7 +13,9 @@ Spielstein
     + Zustand:bool
     + Schwarz:bool
 Controler
-    +main():int
+    + main():int
+    + saveHighscore(NameSpieler)
+    + loadHighscore():Highscores[] 
 ComputerPlayer
  +nextmove()
  
