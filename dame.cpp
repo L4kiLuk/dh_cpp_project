@@ -2,6 +2,6 @@
 
 int main(){
     Controller controller;
-    controller.start();
+    controller.init();
     return 0;
 }

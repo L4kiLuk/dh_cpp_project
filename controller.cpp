@@ -5,7 +5,7 @@
 #include "controller.hpp"
 #include "messageCenter.cpp"
 
-//Constructor: Init the default game
+
 Controller::Controller(){
     
     
@@ -15,7 +15,7 @@ Controller::~Controller(){
     //Autosave the Game
 }
 
-void Controller::start(){
+void Controller::init(){
     //Print Welcome message
     std::cout << welcomeMessage();
     //Open the Input
@@ -46,5 +46,16 @@ void Controller::render(){
     //Print the Game to cli
 }
 
+void Controller::newGame(){
+    //create new Spielfeld
+    //init it
+    //start game
+}
+
+void Controller::loadGame(std::string file){
+    //create new Spielfeld and init it from the file
+    //start game
+    
+}
 
 #endif // CONTROLLER
