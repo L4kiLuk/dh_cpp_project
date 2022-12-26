@@ -42,6 +42,7 @@ Koordinaten_t* Spielfeld::hint(Koordinaten_t from){
 
 
 void Spielfeld::init(){
+    actualPlayer=0;
     //oben (0,1,3 schwarz, unten 5,6,7 weiß)
     // zweite variable ist links(0) nach rechts (7)
     for (int i = 0; i < 8; i++)
@@ -74,4 +75,11 @@ void Spielfeld::init(){
     
 }
 
+    void Spielfeld::changeActualPlayer(){
+        actualPlayer=++actualPlayer%2;
+    }
+
+    int Spielfeld::getActualPlayer(){
+        return actualPlayer;
+    }
 #endif // SPIELFELD

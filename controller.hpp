@@ -2,14 +2,13 @@
 #define HCONTROLLER
 
 #include "Spielfeld.cpp"
+#include "view.hpp"
 
 class Controller
 {
 private:
-    //gamefield
+    View* view;
     Spielfeld* spielfeld;
-    int actualplayer; //1 is the Computer
-    void render();
 public:
     Controller(/* args */);
     ~Controller();

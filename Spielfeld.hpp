@@ -14,6 +14,7 @@ struct Koordinaten
 class Spielfeld
 {
 private:
+    int actualPlayer;
     
 public:
 struct Koordinaten;
@@ -21,6 +22,8 @@ struct Koordinaten;
     bool move(Koordinaten_t from, Koordinaten_t to);
     Koordinaten_t* hint(Koordinaten_t from);
     void init();
+    void changeActualPlayer();
+    int getActualPlayer();
     //Spielfeld(/* args */);
     //~Spielfeld();
 };
