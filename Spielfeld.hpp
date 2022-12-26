@@ -8,6 +8,7 @@ struct Koordinaten
 {
     int x;
     int y;
+    Koordinaten(int px,int py): x(px),y(py){}
 }typedef Koordinaten_t;
 
 class Spielfeld

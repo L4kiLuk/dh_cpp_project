@@ -12,7 +12,7 @@
 bool Spielfeld::move(Koordinaten_t from, Koordinaten_t to){
     //kontrolle
     if(feld[from.x][from.y] == NULL ){
-        std::cout << "Fehler, Spielstein position ungültig";
+        std::cout << "Fehler, Spielstein position ungültig"; //Bitte als exeption oder so. Das kann die Anzeige zerstören. Schreiben sollte nur der Controller.
         return false;
     }else {
         //schwarz -> nach unten
