@@ -69,7 +69,7 @@ void Controller::startGame(){
         std::regex move_pat("move [0-7] [0-7] [0-7] [0-7]");
         if(std::regex_match(nextMove,move_pat)){
             if(true /*spielfeld->move(Koordinaten_t(nextMove.at(5)-'0',nextMove.at(7)-'0'),Koordinaten_t(nextMove.at(9)-'0',nextMove.at(11)-'0'))*/){
-                spielfeld->changeActualPlayer();
+                spielfeld->changeActualPlayer(); //Ausbauen sobald in move() gewechselt wird.
                 view->render("Zug erfolgreich!");
             }else{
                 view->render("Dieser Zug ist nicht Möglich");

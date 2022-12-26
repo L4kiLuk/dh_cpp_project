@@ -14,7 +14,7 @@ struct Koordinaten
 class Spielfeld
 {
 private:
-    int actualPlayer;
+    int actualPlayer; //Track which player has the next move
     
 public:
 struct Koordinaten;
@@ -22,7 +22,7 @@ struct Koordinaten;
     bool move(Koordinaten_t from, Koordinaten_t to);
     Koordinaten_t* hint(Koordinaten_t from);
     void init();
-    void changeActualPlayer();
+    void changeActualPlayer(); //gerne in move() einbauen nach einem erfolgreichen Zug, dann kann ich es aus dem Controller nehmen.
     int getActualPlayer();
     //Spielfeld(/* args */);
     //~Spielfeld();

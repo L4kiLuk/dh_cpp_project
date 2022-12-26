@@ -8,7 +8,7 @@
 
 
 
-//noch unvollständig
+//noch unvollständig, bei erfolgreichem Zug bitte changeActualPlayer aufrufen. Den Methodenaufruf dann aus Contoller startGame() ausbauen.
 bool Spielfeld::move(Koordinaten_t from, Koordinaten_t to){
     //kontrolle
     if(feld[from.x][from.y] == NULL ){
