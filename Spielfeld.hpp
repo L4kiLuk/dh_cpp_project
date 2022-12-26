@@ -1,8 +1,14 @@
 #ifndef Spielfeld_c
 #define Spielfeld_C
 
-#include "Spielstein.hpp"
+#include "Spielstein.cpp"
 #include <string>
+
+struct Koordinaten
+{
+    int x;
+    int y;
+}typedef Koordinaten_t;
 
 class Spielfeld
 {

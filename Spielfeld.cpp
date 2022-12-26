@@ -1,13 +1,12 @@
+
+#if !defined(SPIELFELD)
+#define SPIELFELD
+
 #include "Spielfeld.hpp"
-#include "Spielstein.hpp"
 #include <string>
 #include <iostream> 
 
-struct Koordinaten
-{
-    int x;
-    int y;
-}typedef Koordinaten_t;
+
 
 //noch unvollständig
 bool Spielfeld::move(Koordinaten_t from, Koordinaten_t to){
@@ -55,7 +54,7 @@ void Spielfeld::init(){
             if(i==1&&((j%2)==0)){
                 feld[i][j] = new Spielstein(false, true);
             }else 
-            if(i==3&&((j%2)==1)){
+            if(i==2&&((j%2)==1)){
                 feld[i][j] = new Spielstein(false, true);
             }else
             if(i==5&&((j%2)==0)){
@@ -74,3 +73,5 @@ void Spielfeld::init(){
     }
     
 }
+
+#endif // SPIELFELD

@@ -1,7 +1,7 @@
 #if !defined(HCONTROLLER)
 #define HCONTROLLER
 
-#include"Spielfeld.hpp"
+#include "Spielfeld.cpp"
 
 class Controller
 {

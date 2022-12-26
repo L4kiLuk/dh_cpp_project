@@ -27,6 +27,9 @@ void Controller::init(){
             case '1':
                 //New Game
                 std::cout << "New Game"<< std::endl;
+                spielfeld = new Spielfeld;
+                spielfeld->init();
+                render();
                 break;
             case '2':
                 //Load Autosave
@@ -37,13 +40,25 @@ void Controller::init(){
             
         }
     }
-    //Handle manipulations(new Game||load Game||autosave)
-    //Start the game
+    
 
 }
 
 void Controller::render(){
     //Print the Game to cli
+    //Simple implementation
+    for(int x=0;x<8;x++){
+        for(int y=0;y<8;y++){
+            if(spielfeld->feld[x][y]==NULL){
+                std::cout <<"  ";
+            }else if(spielfeld->feld[x][y]->schwarz){
+                std::cout << "0 ";
+            }else{
+                std::cout <<"1 ";
+            }
+        }
+        std::cout << std::endl;
+    }
 }
 
 void Controller::newGame(){
