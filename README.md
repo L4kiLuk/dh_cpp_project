@@ -22,3 +22,11 @@ ComputerPlayer
  
  Main
     + main():int - Lukas
+
+# ToDo
+- refactor to Englisch
+- Dateinamen anpassen
+- actualPlayer in Spielfeld einbauen
+- zugcounter in Spieldeld einbauen
+- Gewinner entscheidung über isrunning, exeption, ...
+- isrunning:bool in Spielfeld einbauen
