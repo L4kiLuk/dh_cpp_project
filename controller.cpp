@@ -3,6 +3,7 @@
 
 #include <iostream>
 #include <regex>
+#include <fstream>
 #include "controller.hpp"
 #include "messageCenter.cpp"
 #include "view.cpp"
@@ -81,4 +82,27 @@ void Controller::startGame(){
     }
 }
 
+void Controller::saveHighscore(std::string playerName,int score){
+    std::ofstream ostream("highscores.hsc",std::ios::app);
+    std::time_t time = std::chrono::system_clock::to_time_t(std::chrono::system_clock::now());
+    ostream << std::ctime(&time) <<" "<< playerName <<" "<<score <<std::endl;
+    ostream.close();
+}
+
+std::vector<Highscore> Controller::loadHighscores(){
+    std::vector<Highscore> highscores;
+    std::ifstream istream("highscores.hsc");
+    std::string name;
+    std::string time;
+    int score;
+    while (std::getline(istream,time))
+    {
+        istream >> name;
+        istream >> score;
+        highscores.push_back(Highscore(name,score,time));
+        std::getline(istream,time); //to jump to next line and read the date right.
+    }
+    istream.close();
+    return highscores;
+}
 #endif // CONTROLLER

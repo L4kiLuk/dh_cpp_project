@@ -4,8 +4,8 @@
 #define CLEARCONSOLE system("clear")
 #define EMPTYBLACKFIELD "\033[40m  \033[0m"
 #define EMPTYWHITEFIELD "\033[47m  \033[0m"
-#define BLACKSTONE "\033[40;30m⌾ \033[0m"
-#define WHITESTONE "\033[40;37m⌾ \033[0m"
+#define BLACKSTONE "\033[40;30m⭗ \033[0m"
+#define WHITESTONE "\033[40;37m⭗ \033[0m"
 /*
   0   0   0   0 
 0   0   0   0   
