@@ -3,7 +3,7 @@
 
 Spielstein::Spielstein(bool z, bool s)
 {
-    zustand = z;
+    zustand = z;//enum : normal, dame, hint
     schwarz = s;
     
 }

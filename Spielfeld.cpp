@@ -17,7 +17,21 @@ bool Spielfeld::move(Koordinaten_t from, Koordinaten_t to){
         return false;
     }else {
         //schwarz -> nach unten
-        if ((to.x==from.x-1)&&(to.y==from.y-1||to.y==from.y+1) && feld[to.x][to.y] == NULL && feld[from.x][from.y]->schwarz==true)
+        if ((to.x==from.x+1)&&(to.y==from.y-1||to.y==from.y+1) && feld[to.x][to.y] == NULL && feld[from.x][from.y]->schwarz==true)
+        {
+            feld[to.x][to.y]=feld[from.x][from.y];
+            feld[from.x][from.y] = NULL;
+            return true;
+        }
+        else if((to.x==from.x+2)&&(to.y==from.y-2||to.y==from.y+2)&&feld[to.x][to.y]==NULL&& feld[from.x+(to.x-from.x)][from.y+(to.y-from.y)]->schwarz!=feld[from.x][from.y]->schwarz && feld[from.x][from.y]->schwarz==true){
+            feld[to.x][to.y]=feld[from.x][from.y];
+            feld[from.x][from.y] = NULL;
+            feld[from.x+(to.x-from.x)][from.y+(to.y-from.y)] = NULL;
+            return true;
+
+        }
+        //weiß unten nach oben
+        else if ((to.x==from.x-1)&&(to.y==from.y-1||to.y==from.y+1) && feld[to.x][to.y] == NULL && feld[from.x][from.y]->schwarz==true)
         {
             feld[to.x][to.y]=feld[from.x][from.y];
             feld[from.x][from.y] = NULL;
