@@ -30,3 +30,4 @@ ComputerPlayer
 - zugcounter in Spieldeld einbauen
 - Gewinner entscheidung über isrunning, exeption, ...
 - isrunning:bool in Spielfeld einbauen
+- Hintsystem vorbereiten
