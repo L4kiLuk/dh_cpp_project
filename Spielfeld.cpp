@@ -1,19 +1,18 @@
+
+#if !defined(SPIELFELD)
+#define SPIELFELD
+
 #include "Spielfeld.hpp"
-#include "Spielstein.hpp"
 #include <string>
 #include <iostream> 
 
-struct Koordinaten
-{
-    int x;
-    int y;
-}typedef Koordinaten_t;
 
-//noch unvollständig
+
+//noch unvollständig, bei erfolgreichem Zug bitte changeActualPlayer aufrufen. Den Methodenaufruf dann aus Contoller startGame() ausbauen.
 bool Spielfeld::move(Koordinaten_t from, Koordinaten_t to){
     //kontrolle
     if(feld[from.x][from.y] == NULL ){
-        std::cout << "Fehler, Spielstein position ungültig";
+        std::cout << "Fehler, Spielstein position ungültig"; //Bitte als exeption oder so. Das kann die Anzeige zerstören. Schreiben sollte nur der Controller.
         return false;
     }else {
         //schwarz -> nach unten
@@ -57,6 +56,7 @@ Koordinaten_t* Spielfeld::hint(Koordinaten_t from){
 
 
 void Spielfeld::init(){
+    actualPlayer=0;
     //oben (0,1,3 schwarz, unten 5,6,7 weiß)
     // zweite variable ist links(0) nach rechts (7)
     for (int i = 0; i < 8; i++)
@@ -69,7 +69,7 @@ void Spielfeld::init(){
             if(i==1&&((j%2)==0)){
                 feld[i][j] = new Spielstein(false, true);
             }else 
-            if(i==3&&((j%2)==1)){
+            if(i==2&&((j%2)==1)){
                 feld[i][j] = new Spielstein(false, true);
             }else
             if(i==5&&((j%2)==0)){
@@ -88,3 +88,12 @@ void Spielfeld::init(){
     }
     
 }
+
+    void Spielfeld::changeActualPlayer(){
+        actualPlayer=++actualPlayer%2;
+    }
+
+    int Spielfeld::getActualPlayer(){
+        return actualPlayer;
+    }
+#endif // SPIELFELD
