@@ -1,26 +1,26 @@
-#ifndef Spielfeld_c
-#define Spielfeld_C
+#ifndef Matchfield_H
+#define Matchfield_H
 
-#include "Spielstein.cpp"
+#include "Stone.cpp"
 #include <string>
 
-struct Koordinaten
+struct Coordinates
 {
     int x;
     int y;
-    Koordinaten(int px,int py): x(px),y(py){}
-}typedef Koordinaten_t;
+    Coordinates(int px,int py): x(px),y(py){}
+}typedef Coordinates_t;
 
-class Spielfeld
+class Matchfield
 {
 private:
     int actualPlayer; //Track which player has the next move
     
 public:
-struct Koordinaten;
-    Spielstein* feld[8][8];
-    bool move(Koordinaten_t from, Koordinaten_t to);
-    Koordinaten_t* hint(Koordinaten_t from);
+struct Coordinates;
+    Stone* field[8][8];
+    bool move(Coordinates_t from, Coordinates_t to);
+    Coordinates_t* hint(Coordinates_t from);
     void init();
     void changeActualPlayer(); //gerne in move() einbauen nach einem erfolgreichen Zug, dann kann ich es aus dem Controller nehmen.
     int getActualPlayer();
