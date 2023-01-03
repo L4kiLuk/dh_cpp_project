@@ -20,12 +20,15 @@ bool Matchfield::move(Coordinates_t from, Coordinates_t to){
         {
             field[to.x][to.y]=field[from.x][from.y];
             field[from.x][from.y] = NULL;
+            changeActualPlayer();
             return true;
         }
         else if((to.x==from.x+2)&&(to.y==from.y-2||to.y==from.y+2)&&field[to.x][to.y]==NULL&& field[from.x+(to.x-from.x)][from.y+(to.y-from.y)]->black!=field[from.x][from.y]->black && field[from.x][from.y]->black==true){
             field[to.x][to.y]=field[from.x][from.y];
             field[from.x][from.y] = NULL;
             field[from.x+(to.x-from.x)][from.y+(to.y-from.y)] = NULL;
+            //check for another move
+            changeActualPlayer();
             return true;
 
         }
@@ -34,12 +37,15 @@ bool Matchfield::move(Coordinates_t from, Coordinates_t to){
         {
             field[to.x][to.y]=field[from.x][from.y];
             field[from.x][from.y] = NULL;
+            changeActualPlayer();
             return true;
         }
         else if((to.x==from.x-2)&&(to.y==from.y-2||to.y==from.y+2)&&field[to.x][to.y]==NULL&& field[from.x+(to.x-from.x)][from.y+(to.y-from.y)]->black!=field[from.x][from.y]->black && field[from.x][from.y]->black==true){
             field[to.x][to.y]=field[from.x][from.y];
             field[from.x][from.y] = NULL;
             field[from.x+(to.x-from.x)][from.y+(to.y-from.y)] = NULL;
+            //check for another move
+            changeActualPlayer();
             return true;
 
         }
