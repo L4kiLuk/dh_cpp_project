@@ -4,7 +4,7 @@
 #include "view.hpp"
 
 void View::render(){
-    system("clear");
+    CLEARCONSOLE
     std::cout << "Spieler " << (*gamefield)->getActualPlayer()<< " ist an der Reihe!" <<std::endl;
     for(int x=0;x<8;x++){
         for(int y=0;y<8;y++){
