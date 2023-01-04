@@ -9,7 +9,7 @@
 #include "view.cpp"
 
 Controller::Controller(){
-    view = new View(&spielfeld);
+    view = new View(&matchfield);
     
 }
 
@@ -47,9 +47,9 @@ void Controller::init(){
 
 void Controller::newGame(){
     //create new Spielfeld
-    spielfeld = new Spielfeld;
+    matchfield = new Matchfield;
     //init it
-    spielfeld->init();
+    matchfield->init();
     //start game
     startGame();
 }
@@ -69,8 +69,8 @@ void Controller::startGame(){
         std::getline(std::cin,nextMove);
         std::regex move_pat("move [0-7] [0-7] [0-7] [0-7]");
         if(std::regex_match(nextMove,move_pat)){
-            if(true /*spielfeld->move(Koordinaten_t(nextMove.at(5)-'0',nextMove.at(7)-'0'),Koordinaten_t(nextMove.at(9)-'0',nextMove.at(11)-'0'))*/){
-                spielfeld->changeActualPlayer(); //Ausbauen sobald in move() gewechselt wird.
+            if(true /*spielfeld->move(Coordinates_t(nextMove.at(5)-'0',nextMove.at(7)-'0'),Coordinates_t(nextMove.at(9)-'0',nextMove.at(11)-'0'))*/){
+                matchfield->changeActualPlayer(); //Ausbauen sobald in move() gewechselt wird.
                 view->render("Zug erfolgreich!");
             }else{
                 view->render("Dieser Zug ist nicht Möglich");

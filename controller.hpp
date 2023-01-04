@@ -1,7 +1,7 @@
 #if !defined(HCONTROLLER)
 #define HCONTROLLER
 
-#include "Spielfeld.cpp"
+#include "Matchfield.cpp"
 #include "view.hpp"
 #include <vector>
 #include <chrono>
@@ -19,7 +19,7 @@ class Controller
 {
 private:
     View* view;
-    Spielfeld* spielfeld;
+    Matchfield* matchfield;
 public:
     Controller(/* args */);
     ~Controller();

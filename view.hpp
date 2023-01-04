@@ -34,18 +34,18 @@
 */
 
 #include <iostream>
-#include "Spielfeld.cpp"
+#include "Matchfield.cpp"
 //Handle all Output while a Game is running
 class View
 {
 private:
     /* data */
     std::string optmessage;
-    Spielfeld** gamefield;
+    Matchfield** gamefield;
 
     
 public:
-    View(Spielfeld** ptr_gamefield): gamefield(ptr_gamefield){};
+    View(Matchfield** ptr_gamefield): gamefield(ptr_gamefield){};
     void render();
     void render(std::string message);
     void setOptMessage(std::string message){optmessage=message;} //Set a message to print at the next rendering. Message will be deleted after the next call of render()

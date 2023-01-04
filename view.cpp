@@ -8,13 +8,13 @@ void View::render(){
     std::cout << "Spieler " << (*gamefield)->getActualPlayer()<< " ist an der Reihe!" <<std::endl;
     for(int x=0;x<8;x++){
         for(int y=0;y<8;y++){
-            if((*gamefield)->feld[x][y]==NULL){
+            if((*gamefield)->field[x][y]==NULL){
                 if((x+y)%2){
                     std::cout <<EMPTYBLACKFIELD; 
                 }else{
                     std::cout <<EMPTYWHITEFIELD;
                 }
-            }else if((*gamefield)->feld[x][y]->schwarz){
+            }else if((*gamefield)->field[x][y]->black){
                 std::cout << BLACKSTONE;
             }else{
                 std::cout <<WHITESTONE;
