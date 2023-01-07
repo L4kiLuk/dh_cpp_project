@@ -49,6 +49,11 @@ public:
     void render();
     void render(std::string message);
     void setOptMessage(std::string message){optmessage=message;} //Set a message to print at the next rendering. Message will be deleted after the next call of render()
+    void printWelcomeMessage();
+    void printHelp();
+    void printMenu();
+    void printAutosaveFound();
+
     
 };
 

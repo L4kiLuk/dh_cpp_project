@@ -8,6 +8,9 @@
 #include <ctime>
 #include <csignal>
 
+#define AUTOSAVEFILE "autosave.sgf"
+#define HIGHSCOREFILE "highscores.hsc"
+
 typedef struct s_highscore
 {
     int score;
