@@ -1,6 +1,6 @@
 #if !defined(VIEWH)
 #define VIEWH
-//#define USEUNICODE
+#define USEUNICODE
 
 #ifdef USEUNICODE
 #define CLEARCONSOLE std::cout<< u8"\033[2J\033[1;1H";

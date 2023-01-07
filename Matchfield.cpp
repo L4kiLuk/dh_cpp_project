@@ -102,4 +102,7 @@ void Matchfield::init(){
     int Matchfield::getActualPlayer(){
         return actualPlayer;
     }
+    void Matchfield::setActualPlayer(int player){
+        actualPlayer=player;
+    }
 #endif // SPIELFELD

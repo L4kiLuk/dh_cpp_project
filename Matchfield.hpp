@@ -24,6 +24,7 @@ struct Coordinates;
     void init();
     void changeActualPlayer(); //gerne in move() einbauen nach einem erfolgreichen Zug, dann kann ich es aus dem Controller nehmen.
     int getActualPlayer();
+    void setActualPlayer(int player);
     //Spielfeld(/* args */);
     //~Spielfeld();
 };

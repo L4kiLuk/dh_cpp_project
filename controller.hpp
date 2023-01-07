@@ -6,6 +6,7 @@
 #include <vector>
 #include <chrono>
 #include <ctime>
+#include <csignal>
 
 typedef struct s_highscore
 {
@@ -21,6 +22,7 @@ private:
     View* view;
     Matchfield* matchfield;
 public:
+    static inline Matchfield** sigObj;
     Controller(/* args */);
     ~Controller();
     void init();
@@ -29,8 +31,9 @@ public:
     void startGame();
     void saveHighscore(std::string playerName,int score);
     std::vector<Highscore> loadHighscores();
-
+    
 };
+    void signal_handler(int signal);
 
 
 
