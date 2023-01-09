@@ -70,22 +70,22 @@ void Matchfield::init(){
     {
         for (int j = 0; j < 8; j++)
         {
-            if(i==0&&((j%2)==1)){
+            if(j==0&&((i%2)==1)){
                 field[i][j] = new Stone(false, true);
             }else
-            if(i==1&&((j%2)==0)){
+            if(j==1&&((i%2)==0)){
                 field[i][j] = new Stone(false, true);
             }else 
-            if(i==2&&((j%2)==1)){
+            if(j==2&&((i%2)==1)){
                 field[i][j] = new Stone(false, true);
             }else
-            if(i==5&&((j%2)==0)){
+            if(j==5&&((i%2)==0)){
                 field[i][j] = new Stone(false, false);
             }else 
-            if(i==6&&((j%2)==1)){
+            if(j==6&&((i%2)==1)){
                 field[i][j] = new Stone(false, false);
             }else
-            if(i==7&&((j%2)==0)){
+            if(j==7&&((i%2)==0)){
                 field[i][j] = new Stone(false, false);
             }else {
                 field[i][j] = NULL;
@@ -102,5 +102,8 @@ void Matchfield::init(){
 
     int Matchfield::getActualPlayer(){
         return actualPlayer;
+    }
+    void Matchfield::setActualPlayer(int player){
+        actualPlayer=player;
     }
 #endif // SPIELFELD
