@@ -28,7 +28,7 @@ bool Matchfield::move(Coordinates_t from, Coordinates_t to){
             field[from.x][from.y] = NULL;
             field[from.x+(to.x-from.x)][from.y+(to.y-from.y)] = NULL;
             //check for another move
-            //hint(to).lenth();
+            //hint(to).size();
             changeActualPlayer();
             return true;
 
@@ -46,6 +46,7 @@ bool Matchfield::move(Coordinates_t from, Coordinates_t to){
             field[from.x][from.y] = NULL;
             field[from.x+(to.x-from.x)][from.y+(to.y-from.y)] = NULL;
             //check for another move
+            //hint(to).size();
             changeActualPlayer();
             return true;
 
@@ -55,9 +56,22 @@ bool Matchfield::move(Coordinates_t from, Coordinates_t to){
 
 }
 
+std::vector<Cordinates_t> Matchfield::hint(Coordinates_t from){
+    return hint(from, false);
+}
+
 //noch unvollständig
-Coordinates_t* Matchfield::hint(Coordinates_t from){
+std::vector<Cordinates_t> Matchfield::hint(Coordinates_t from, bool beat_only){
+    if(beat_only == true){
+        //weiß schlagen
+        //schwarz schlagen
+        
+    }
+    //schwarz normal
+    //weiß normal
     
+    //schwarz dame
+    //weiß dame
 }
 
 
