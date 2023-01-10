@@ -5,6 +5,7 @@
 #include "Matchfield.hpp"
 #include <string>
 #include <iostream> 
+#include <vector>
 
 
 
@@ -56,12 +57,12 @@ bool Matchfield::move(Coordinates_t from, Coordinates_t to){
 
 }
 
-std::vector<Cordinates_t> Matchfield::hint(Coordinates_t from){
+std::vector<Coordinates_t> Matchfield::hint(Coordinates_t from){
     return hint(from, false);
 }
 
 //noch unvollständig
-std::vector<Cordinates_t> Matchfield::hint(Coordinates_t from, bool beat_only){
+std::vector<Coordinates_t> Matchfield::hint(Coordinates_t from, bool beat_only){
     if(beat_only == true){
         //weiß schlagen
         //schwarz schlagen
