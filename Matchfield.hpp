@@ -3,6 +3,7 @@
 
 #include "Stone.cpp"
 #include <string>
+#include <vector>
 
 struct Coordinates
 {
@@ -20,7 +21,8 @@ public:
 struct Coordinates;
     Stone* field[8][8];
     bool move(Coordinates_t from, Coordinates_t to);
-    Coordinates_t* hint(Coordinates_t from);
+    std::vector<Coordinates_t> hint(Coordinates_t from, bool beat_only);
+    std::vector<Coordinates_t> hint(Coordinates_t from);
     void init();
     void changeActualPlayer(); //gerne in move() einbauen nach einem erfolgreichen Zug, dann kann ich es aus dem Controller nehmen.
     int getActualPlayer();
