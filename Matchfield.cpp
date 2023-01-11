@@ -186,24 +186,24 @@ void Matchfield::init(){
         for (int j = 0; j < 8; j++)
         {
             if(j==0&&((i%2)==1)){
-                field[i][j] = new Stone(false, true);
+                field[j][i] = new Stone(false, true);
             }else
             if(j==1&&((i%2)==0)){
-                field[i][j] = new Stone(false, true);
+                field[j][i] = new Stone(false, true);
             }else 
             if(j==2&&((i%2)==1)){
-                field[i][j] = new Stone(false, true);
+                field[j][i] = new Stone(false, true);
             }else
             if(j==5&&((i%2)==0)){
-                field[i][j] = new Stone(false, false);
+                field[j][i] = new Stone(false, false);
             }else 
             if(j==6&&((i%2)==1)){
-                field[i][j] = new Stone(false, false);
+                field[j][i] = new Stone(false, false);
             }else
             if(j==7&&((i%2)==0)){
-                field[i][j] = new Stone(false, false);
+                field[j][i] = new Stone(false, false);
             }else {
-                field[i][j] = NULL;
+                field[j][i] = NULL;
             }
         }
         
