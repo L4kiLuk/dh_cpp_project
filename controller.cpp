@@ -107,13 +107,14 @@ void Controller::startGame(){
     view->render();
     while(isRunning){
         std::getline(std::cin,nextMove);
-        std::regex move_pat("move [0-7] [0-7] [0-7] [0-7]");
-        std::regex hint_pat("hint [0-7] [0-7]");
+        std::regex move_pat("move [a-h][1-8] [a-h][1-8]");
+        std::regex hint_pat("hint [a-h][1-8]");
+        std::regex help_pat("help");
         if(std::regex_match(nextMove,move_pat)){
-            if(matchfield->move(Coordinates_t(nextMove.at(5)-'0',nextMove.at(7)-'0'),Coordinates_t(nextMove.at(9)-'0',nextMove.at(11)-'0'))){
+            if(matchfield->move(Coordinates_t(7-(nextMove.at(6)-'1'),nextMove.at(5)-'a'),Coordinates_t(7-(nextMove.at(9)-'1'),nextMove.at(8)-'a'))){
                 //matchfield->changeActualPlayer(); //Ausbauen sobald in move() gewechselt wird.
                 view->render("Zug erfolgreich!");
-                if(withComputer){
+                if(withComputer&&matchfield->getActualPlayer()==0){
                     robot.nextMove();
                     view->render();
                 }
@@ -122,9 +123,12 @@ void Controller::startGame(){
             }
         }
         else if(std::regex_match(nextMove,hint_pat)){
-            //matchfield->hint(Coordinates_t(nextMove.at(5)-'0',nextMove.at(7)-'0'));
+            //matchfield->hint(Coordinates_t(nextMove.at(6)-'a',nextMove.at(5)-'1'));
             view->render("Das sind die Mögliche Züge!");
         }
+        else if (std::regex_match(nextMove,help_pat)){
+            view->printHelp();
+        }        
         else{
             view->render("Falscher Befehl!");
         }

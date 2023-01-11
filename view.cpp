@@ -6,7 +6,9 @@
 void View::render(){
     CLEARCONSOLE
     std::cout << "Spieler " << (*gamefield)->getActualPlayer()<< " ist an der Reihe!" <<std::endl;
+    std::cout << " a b c d e f g h"<<std::endl;
     for(int x=0;x<8;x++){
+        std::cout << 8-x;
         for(int y=0;y<8;y++){
             if((*gamefield)->field[x][y]==NULL){
                 if((x+y)%2){
@@ -20,8 +22,9 @@ void View::render(){
                 std::cout <<WHITESTONE;
             }
         }
-        std::cout << std::endl;
+        std::cout <<8-x<< std::endl;
     }
+    std::cout << " a b c d e f g h"<<std::endl;
     std::cout << optmessage << std::endl;
     optmessage = "";
 }
@@ -38,9 +41,9 @@ void View::printWelcomeMessage(){
 void View::printHelp(){
     std::cout   << "help" << std::endl
                 << "    Zeige diese Hilfe an." << std::endl
-                << "move <fromx> <fromy> <tox> <toy>" << std::endl
+                << "move <fromx><fromy> <tox><toy> (move a3 b4)" << std::endl
                 << "    Ziehe einen Stein an eine andere Position." << std::endl
-                << "hint <fromx> <fromy>" << std::endl
+                << "hint <fromx><fromy>" << std::endl
                 << "    Lass dir die Möglichen Zuge eines Steines anzeigen" << std::endl;
 }
 
