@@ -24,6 +24,7 @@ class Controller
 private:
     View* view;
     Matchfield* matchfield;
+    bool withComputer = false;
 public:
     static inline Matchfield** sigObj;
     Controller(/* args */);

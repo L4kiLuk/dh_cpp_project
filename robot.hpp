@@ -21,6 +21,7 @@ private:
     /* data */
     Matchfield* matchfield;
     PossibleMove bestMove=PossibleMove(Coordinates(0,0),Coordinates(0,0));
+    
 public:
     Robot(Matchfield** pMatchfield){matchfield = (*pMatchfield);}
     void nextMove();    //Makes the best move for the Robot.

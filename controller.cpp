@@ -93,20 +93,30 @@ void Controller::loadGame(std::string file){
 }
 
 void Controller::startGame(){
+    std::cout << "Möchtest du gegen den Computer Spielen? y/n"<<std::endl;
+    char in;
+    std::cin >> in;
+    if(in='y'){
+        withComputer=true;
+    }
     bool isRunning = true;
     std::string nextMove;
     std::getline(std::cin,nextMove);
     Robot robot = Robot(&matchfield);
+    matchfield->changeActualPlayer();
     view->render();
-    robot.nextMove();
     while(isRunning){
         std::getline(std::cin,nextMove);
         std::regex move_pat("move [0-7] [0-7] [0-7] [0-7]");
         std::regex hint_pat("hint [0-7] [0-7]");
         if(std::regex_match(nextMove,move_pat)){
             if(matchfield->move(Coordinates_t(nextMove.at(5)-'0',nextMove.at(7)-'0'),Coordinates_t(nextMove.at(9)-'0',nextMove.at(11)-'0'))){
-                matchfield->changeActualPlayer(); //Ausbauen sobald in move() gewechselt wird.
+                //matchfield->changeActualPlayer(); //Ausbauen sobald in move() gewechselt wird.
                 view->render("Zug erfolgreich!");
+                if(withComputer){
+                    robot.nextMove();
+                    view->render();
+                }
             }else{
                 view->render("Dieser Zug ist nicht Möglich");
             }

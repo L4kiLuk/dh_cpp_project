@@ -21,7 +21,7 @@ void Robot::nextMove(){
             }
         }
     }
-   matchfield->move(bestMove.from,bestMove.to);
+   bool result = matchfield->move(bestMove.from,bestMove.to);
 }
 
 std::vector<PossibleMove> Robot::findMoves(PossibleMove posMove){
@@ -35,10 +35,10 @@ std::vector<PossibleMove> Robot::findMoves(PossibleMove posMove){
         int nextY = posMove.to.y+1;
         if(nextX<8&&nextY<8)
         if(matchfield->field[nextX][nextY]==NULL){
-            PossibleMove posMoveRight(posMove.from,Coordinates(nextX,nextY),posMove.benefit++);
+            PossibleMove posMoveRight(posMove.from,Coordinates(nextX,nextY),++(posMove.benefit));
             moves.push_back(posMoveRight);
         }else if(!matchfield->field[nextX][nextY]->black){
-            PossibleMove posMoveRight(posMove.from,Coordinates(nextX,nextY),posMove.benefit++);
+            PossibleMove posMoveRight(posMove.from,Coordinates(nextX,nextY),++(posMove.benefit));
             for(PossibleMove move:findMoves(posMoveRight)){
                 moves.push_back(move);
             }
@@ -46,10 +46,10 @@ std::vector<PossibleMove> Robot::findMoves(PossibleMove posMove){
         nextY = posMove.to.y-1;
         if(nextX<8&&nextY>=0)
         if(matchfield->field[nextX][nextY]==NULL){
-            PossibleMove posMoveLeft(posMove.from,Coordinates(nextX,nextY),posMove.benefit++);
+            PossibleMove posMoveLeft(posMove.from,Coordinates(nextX,nextY),++(posMove.benefit));
             moves.push_back(posMoveLeft);
         }else if(!matchfield->field[nextX][nextY]->black){
-            PossibleMove posMoveLeft(posMove.from,Coordinates(nextX,nextY),posMove.benefit++);
+            PossibleMove posMoveLeft(posMove.from,Coordinates(nextX,nextY),++(posMove.benefit));
             for(PossibleMove move:findMoves(posMoveLeft)){
                 moves.push_back(move);
             }
