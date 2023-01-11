@@ -53,7 +53,17 @@ bool Matchfield::move(Coordinates_t from, Coordinates_t to){
             }
             
             return true;
-
+        
+        } //dame
+        else if(field[from.x][from.y].state == true){
+            for(Coordinates_t coord : hint(from)){
+                if(coord.x == to.x && coord.y == to.y){
+                    if(hint(to, true).size() == 0){
+                        changeActualPlayer();
+                    }
+                    return true;
+                }
+            }
         }
         
     }
@@ -67,21 +77,102 @@ std::vector<Coordinates_t> Matchfield::hint(Coordinates_t from){
 //noch unvollständig
 std::vector<Coordinates_t> Matchfield::hint(Coordinates_t from, bool beat_only){
     std::vector<Coordinates_t> vector;
-    if(beat_only == true){
-        if(field[from.x][from.y]->state==false&&field[from.x][from.y]->black==false&&field[from.x-1][from.y-1]->black==true&&field[from.x-2][from.y-2]==NULL){
-            //vector.push_back(new Coordinates_t(from.x-2, from.y-2));
-        }
-        if(field[from.x][from.y]->state==false&&field[from.x][from.y]->black==false&&field[from.x+1][from.y-1]->black==true&&field[from.x+2][from.y-2]==NULL){
-        }
-        //weiß schlagen
-        //schwarz schlagen
-        
-    }
-    //schwarz normal
-    //weiß normal
     
-    //schwarz dame
-    //weiß dame
+    //weiß schlagen
+    if(field[from.x][from.y]->state==false&&field[from.x][from.y]->black==false&&field[from.x-1][from.y-1]->black==true&&field[from.x-2][from.y-2]==NULL){
+        //vector.push_back(new Coordinates_t(from.x-2, from.y-2));
+    }
+    if(field[from.x][from.y]->state==false&&field[from.x][from.y]->black==false&&field[from.x+1][from.y-1]->black==true&&field[from.x+2][from.y-2]==NULL){
+        //vector.push_back(new Coordinates_t(from.x-2, from.y-2));
+    }
+    //schwarz schlagen
+     if(field[from.x][from.y]->state==false&&field[from.x][from.y]->black==true&&field[from.x-1][from.y+1]->black==false&&field[from.x-2][from.y+2]==NULL){
+        //vector.push_back(new Coordinates_t(from.x-2, from.y+2));
+    }
+    if(field[from.x][from.y]->state==false&&field[from.x][from.y]->black==true&&field[from.x+1][from.y+1]->black==false&&field[from.x+2][from.y+2]==NULL){
+        //vector.push_back(new Coordinates_t(from.x-2, from.y+2));
+    }
+
+    if(beat_only == true){
+          return vector;
+    }
+    
+    //schwarz normal
+    if(field[from.x][from.y]->state==false&&field[from.x][from.y]->black==false&&field[from.x+1][from.y-1]==NULL){
+        //vector.push_back(new Coordinates_t(from.x+1, from.y-1));
+    }
+    if(field[from.x][from.y]->state==false&&field[from.x][from.y]->black==false&&field[from.x-1][from.y-1]==NULL){
+        //vector.push_back(new Coordinates_t(from.x-1, from.y-1));
+    }
+    
+    //weiß normal
+    if(field[from.x][from.y]->state==false&&field[from.x][from.y]->black==true&&field[from.x+1][from.y+1]==NULL){
+        //vector.push_back(new Coordinates_t(from.x+1, from.y+1));
+    }
+    if(field[from.x][from.y]->state==false&&field[from.x][from.y]->black==true&&field[from.x-1][from.y+1]==NULL){
+        //vector.push_back(new Coordinates_t(from.x-1, from.y+1));
+    }
+    
+    
+    if(field[from.x][from.y].state == true){
+         //schwarz dame
+        //weiß dame
+        int maxSteps;
+        int maxX;
+        int maxY;
+        //ÜBERARBEITEN!! Alle 4 richtungen checken aber nicht übern rand raus
+        //unten rechts
+
+        maxX = 7-from.x;
+        maxY = 7-from.y;
+        maxSteps = (maxX<maxY)?maxX:maxY;
+        for(int i = 0; i<maxSteps; i++){
+            if(field[from.x+i][from.y+i]==NULL&&beat_only==false){
+                //vector.push_back(new Coordinates_t(from.x+i, from.y+i));
+            }else if(field[from.x+i+1][from.y+i+1]==NULL&&field[from.x+i][from.y+i].black==!field[from.x][from.y].black){
+                //vector.push_back(new Coordinates_t(from.x+i+1, from.y+i+1));
+                break;
+            }
+        }
+        //unten links
+        maxX = from.x;
+        maxY = 7-from.y;
+        maxSteps = (maxX<maxY)?maxX:maxY;
+        for(int i = 0; i<maxSteps; i++){
+            if(field[from.x-i][from.y+i]==NULL&&beat_only==false){
+                //vector.push_back(new Coordinates_t(from.x-i, from.y+i));
+            }else if(field[from.x-i-1][from.y+i+1]==NULL&&field[from.x-i][from.y+i].black==!field[from.x][from.y].black){
+                //vector.push_back(new Coordinates_t(from.x-i-1, from.y+i+1));
+                break;
+            }
+        }
+        //oben rechts 
+        maxX = 7-from.x;
+        maxY = from.y;
+        maxSteps = (maxX<maxY)?maxX:maxY;
+        for(int i = 0; i<maxSteps; i++){
+            if(field[from.x+i][from.y-i]==NULL&&beat_only==false){
+                //vector.push_back(new Coordinates_t(from.x+i, from.y-i));
+            }else if(field[from.x+i+1][from.y-i-1]==NULL&&field[from.x+i][from.y+i].black==!field[from.x][from.y].black){
+                //vector.push_back(new Coordinates_t(from.x+i+1, from.y-i-1));
+                break;
+            }
+        }
+        //oben links
+        maxX = from.x;
+        maxY = from.y;
+        maxSteps = (maxX<maxY)?maxX:maxY;
+        for(int i = 0; i<maxSteps; i++){
+            if(field[from.x-i][from.y-i]==NULL&&beat_only==false){
+                //vector.push_back(new Coordinates_t(from.x-i, from.y-i));
+            }else if(field[from.x-i-1][from.y-i-1]==NULL&&field[from.x-i][from.y-i].black==!field[from.x][from.y].black){
+                //vector.push_back(new Coordinates_t(from.x-i-1, from.y-i-1));
+                break;
+            }
+        }
+    }
+   
+    return vector;
 }
 
 
