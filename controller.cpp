@@ -121,6 +121,19 @@ void Controller::startGame(){
             }else{
                 view->render("Dieser Zug ist nicht Möglich");
             }
+            /* Spielablauf mit try catch
+            try{
+                matchfield->move(Coordinates_t(7-(nextMove.at(6)-'1'),nextMove.at(5)-'a'),Coordinates_t(7-(nextMove.at(9)-'1'),nextMove.at(8)-'a'));
+                view->render("Zug erfolgreich!");
+                if(withComputer&&matchfield->getActualPlayer()==0){
+                    robot.nextMove();
+                    view->render();
+                }
+            }catch(){// Fehlerhafter Zug
+
+            }catch(){//Spielende
+
+            }*/
         }
         else if(std::regex_match(nextMove,hint_pat)){
             //matchfield->hint(Coordinates_t(nextMove.at(6)-'a',nextMove.at(5)-'1'));
