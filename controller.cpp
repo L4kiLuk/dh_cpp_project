@@ -6,7 +6,7 @@
 #include <fstream>
 #include "controller.hpp"
 #include "view.cpp"
-
+#include "robot.cpp"
 
 Controller::Controller(){
     view = new View(&matchfield);
@@ -96,7 +96,9 @@ void Controller::startGame(){
     bool isRunning = true;
     std::string nextMove;
     std::getline(std::cin,nextMove);
+    Robot robot = Robot(&matchfield);
     view->render();
+    robot.nextMove();
     while(isRunning){
         std::getline(std::cin,nextMove);
         std::regex move_pat("move [0-7] [0-7] [0-7] [0-7]");
