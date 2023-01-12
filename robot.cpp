@@ -26,33 +26,92 @@ void Robot::nextMove(){
    bool result = matchfield->move(bestMove.from,bestMove.to);
 }
 
-std::vector<PossibleMove> Robot::findMoves(PossibleMove posMove,int heading){//heading:0,No,1,Left,2,Right
+std::vector<PossibleMove> Robot::findMoves(PossibleMove posMove,int heading){//heading:0,No,1,Left,2,Right,3,-Left,4,-Right
     std::vector<PossibleMove> moves;
-    
-    if(matchfield->field[posMove.to.x][posMove.to.y]->state){
-        //Dame
-    }else{
-        //Normal
         int nextX = posMove.to.x+1;
         int nextY = posMove.to.y+1;
+    if(matchfield->field[posMove.to.x][posMove.to.y]->state){
+        //Dame
+        
+        if(nextX<8&&nextY<8&&(heading==0||heading==1)){
+            if(matchfield->field[nextX][nextY]==NULL){
+                PossibleMove nextPosMove(posMove.from,Coordinates(nextX,nextY),++(posMove.benefit));
+                moves.push_back(nextPosMove);
+                for(PossibleMove move:findMoves(nextPosMove,1)){
+                    moves.push_back(move);
+                }
+            }else if(!matchfield->field[nextX][nextY]->black){
+                PossibleMove nextPosMove(posMove.from,Coordinates(nextX,nextY),++(posMove.benefit));
+                for(PossibleMove move:findMoves(nextPosMove,1)){
+                    moves.push_back(move);
+                }
+            } 
+        }
+        nextY = posMove.to.y-1;
+        if(nextX<8&&nextY<8&&(heading==0||heading==2)){
+            if(matchfield->field[nextX][nextY]==NULL){
+                PossibleMove nextPosMove(posMove.from,Coordinates(nextX,nextY),++(posMove.benefit));
+                moves.push_back(nextPosMove);
+                for(PossibleMove move:findMoves(nextPosMove,2)){
+                    moves.push_back(move);
+                }
+            }else if(!matchfield->field[nextX][nextY]->black){
+                PossibleMove nextPosMove(posMove.from,Coordinates(nextX,nextY),++(posMove.benefit));
+                for(PossibleMove move:findMoves(nextPosMove,2)){
+                    moves.push_back(move);
+                }
+            } 
+        }
+        nextX = posMove.to.x-1;
+        if(nextX<8&&nextY<8&&(heading==0||heading==3)){
+            if(matchfield->field[nextX][nextY]==NULL){
+                PossibleMove nextPosMove(posMove.from,Coordinates(nextX,nextY),++(posMove.benefit));
+                moves.push_back(nextPosMove);
+                for(PossibleMove move:findMoves(nextPosMove,3)){
+                    moves.push_back(move);
+                }
+            }else if(!matchfield->field[nextX][nextY]->black){
+                PossibleMove nextPosMove(posMove.from,Coordinates(nextX,nextY),++(posMove.benefit));
+                for(PossibleMove move:findMoves(nextPosMove,3)){
+                    moves.push_back(move);
+                }
+            } 
+        }
+        nextY = posMove.to.y+1;
+        if(nextX<8&&nextY<8&&(heading==0||heading==4)){
+            if(matchfield->field[nextX][nextY]==NULL){
+                PossibleMove nextPosMove(posMove.from,Coordinates(nextX,nextY),++(posMove.benefit));
+                moves.push_back(nextPosMove);
+                for(PossibleMove move:findMoves(nextPosMove,4)){
+                    moves.push_back(move);
+                }
+            }else if(!matchfield->field[nextX][nextY]->black){
+                PossibleMove nextPosMove(posMove.from,Coordinates(nextX,nextY),++(posMove.benefit));
+                for(PossibleMove move:findMoves(nextPosMove,4)){
+                    moves.push_back(move);
+                }
+            } 
+        }
+    }else{
+        //Normal
         if(nextX<8&&nextY<8&&heading!=2)
         if(matchfield->field[nextX][nextY]==NULL){
-            PossibleMove posMoveRight(posMove.from,Coordinates(nextX,nextY),++(posMove.benefit));
-            moves.push_back(posMoveRight);
+            PossibleMove nextPosMove(posMove.from,Coordinates(nextX,nextY),++(posMove.benefit));
+            moves.push_back(nextPosMove);
         }else if(!matchfield->field[nextX][nextY]->black){
-            PossibleMove posMoveRight(posMove.from,Coordinates(nextX,nextY),++(posMove.benefit));
-            for(PossibleMove move:findMoves(posMoveRight,1)){
+            PossibleMove nextPosMove(posMove.from,Coordinates(nextX,nextY),++(posMove.benefit));
+            for(PossibleMove move:findMoves(nextPosMove,1)){
                 moves.push_back(move);
             }
         } 
         nextY = posMove.to.y-1;
         if(nextX<8&&nextY>=0&&heading!=1)
         if(matchfield->field[nextX][nextY]==NULL){
-            PossibleMove posMoveLeft(posMove.from,Coordinates(nextX,nextY),++(posMove.benefit));
-            moves.push_back(posMoveLeft);
+            PossibleMove nextPosMove(posMove.from,Coordinates(nextX,nextY),++(posMove.benefit));
+            moves.push_back(nextPosMove);
         }else if(!matchfield->field[nextX][nextY]->black){
-            PossibleMove posMoveLeft(posMove.from,Coordinates(nextX,nextY),++(posMove.benefit));
-            for(PossibleMove move:findMoves(posMoveLeft,2)){
+            PossibleMove nextPosMove(posMove.from,Coordinates(nextX,nextY),++(posMove.benefit));
+            for(PossibleMove move:findMoves(nextPosMove,2)){
                 moves.push_back(move);
             }
         } 
