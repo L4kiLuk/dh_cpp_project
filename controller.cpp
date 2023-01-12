@@ -152,7 +152,7 @@ void Controller::startGame(){
             }
         }
         else if(std::regex_match(nextMove,hint_pat)){
-            view->render("Das sind die Mögliche Züge!",matchfield->hint(Coordinates_t(nextMove.at(6)-'1',nextMove.at(5)-'a')));
+            view->render("Das sind die Mögliche Züge!",matchfield->hint(Coordinates_t(7-(nextMove.at(6)-'1'),nextMove.at(5)-'a')));
         }
         else if (std::regex_match(nextMove,help_pat)){
             view->printHelp();
