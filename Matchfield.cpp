@@ -55,17 +55,20 @@ void Matchfield::move(Coordinates_t from, Coordinates_t to){
             field[from.x][from.y]-> state = true;
         }
         //black -> nach unten
-        if (actualPlayer==0 &&(to.y==from.y-1)&&(to.x==from.x-1||to.x==from.x+1) && field[to.x][to.y] == NULL && field[from.x][from.y]->black==true)
+        if (actualPlayer==0 &&(to.x==from.x+1)&&(to.y==from.y-1||to.y==from.y+1) && field[to.x][to.y] == NULL && field[from.x][from.y]->black==true)
         {
             field[to.x][to.y]=field[from.x][from.y];
+            field[from.x][from.y]->~Stone();
             field[from.x][from.y] = NULL;
             changeActualPlayer();
             
         }
-        else if(actualPlayer==0 &&(to.y==from.y-2)&&(to.x==from.x-2||to.x==from.x+2)&&field[to.x][to.y]==NULL&& field[from.x+((to.x-from.x)/2)][from.y+((to.y-from.y)/2)]->black==false && field[from.x][from.y]->black==true){
+        else if(actualPlayer==0 &&(to.x==from.x+2)&&(to.y==from.y-2||to.y==from.y+2)&&field[to.x][to.y]==NULL&& field[from.x+((to.x-from.x)/2)][from.y+((to.y-from.y)/2)]->black==false && field[from.x][from.y]->black==true){
             field[to.x][to.y]=field[from.x][from.y];
+            field[from.x][from.y]->~Stone();
             field[from.x][from.y] = NULL;
-            field[from.x+(to.x-from.x)][from.y+(to.y-from.y)] = NULL;
+            field[from.x+((to.x-from.x)/2)][from.y+((to.y-from.y)/2)]->~Stone();
+            field[from.x+((to.x-from.x)/2)][from.y+((to.y-from.y)/2)] = NULL;
             //check for another move
             if(hint(to, true).size() == 0){
                 changeActualPlayer();
@@ -73,16 +76,19 @@ void Matchfield::move(Coordinates_t from, Coordinates_t to){
 
         }
         //weiß unten nach oben
-        else if (actualPlayer==1 &&(to.y==from.y+1)&&(to.x==from.x-1||to.x==from.x+1) && field[to.x][to.y] == NULL && field[from.x][from.y]->black==false)
+        else if (actualPlayer==1 &&(to.x==from.x-1)&&(to.y==from.y-1||to.y==from.y+1) && field[to.x][to.y] == NULL && field[from.x][from.y]->black==false)
         {
             field[to.x][to.y]=field[from.x][from.y];
+            field[from.x][from.y]->~Stone();
             field[from.x][from.y] = NULL;
             changeActualPlayer();
         }
-        else if(actualPlayer==1 &&(to.y==from.y+2)&&(to.x==from.x-2||to.x==from.x+2)&&field[to.x][to.y]==NULL&& field[from.x+((to.x-from.x)/2)][from.y+((to.y-from.y)/2)]->black!=field[from.x][from.y]->black && field[from.x][from.y]->black==false){
+        else if(actualPlayer==1 &&(to.x==from.x-2)&&(to.y==from.y-2||to.y==from.y+2)&&field[to.x][to.y]==NULL&& field[from.x+((to.x-from.x)/2)][from.y+((to.y-from.y)/2)]->black!=field[from.x][from.y]->black && field[from.x][from.y]->black==false){
             field[to.x][to.y]=field[from.x][from.y];
+            field[from.x][from.y]->~Stone();
             field[from.x][from.y] = NULL;
-            field[from.x+(to.x-from.x)][from.y+(to.y-from.y)] = NULL;
+            field[from.x+((to.x-from.x)/2)][from.y+((to.y-from.y)/2)]->~Stone();
+            field[from.x+((to.x-from.x)/2)][from.y+((to.y-from.y)/2)] = NULL;
             //check for another move
             if(hint(to, true).size() == 0){
                 changeActualPlayer();
@@ -115,23 +121,23 @@ std::vector<Coordinates_t> Matchfield::hint(Coordinates_t from){
 std::vector<Coordinates> Matchfield::hint(Coordinates_t from, bool beat_only){
     std::vector<Coordinates_t> vector;
     //weiß schlagen
-    if(field[from.x-1][from.y-1]!=NULL&&from.x>1&&from.y>1){
+    if(field[from.x-1][from.y-1]!=NULL&&from.y>1&&from.x>1){
         if(field[from.x][from.y]->state==false&&field[from.x][from.y]->black==false&&field[from.x-1][from.y-1]->black==true&&field[from.x-2][from.y-2]==NULL){
             vector.push_back(Coordinates_t(from.x-2, from.y-2));
         }
     }
-    if(field[from.x+1][from.y-1]!=NULL&&from.x<6&&from.y>1){
-        if(field[from.x][from.y]->state==false&&field[from.x][from.y]->black==false&&field[from.x+1][from.y-1]->black==true&&field[from.x+2][from.y-2]==NULL){
+    if(field[from.x-1][from.y+1]!=NULL&&from.y<6&&from.x>1){
+        if(field[from.x][from.y]->state==false&&field[from.x][from.y]->black==false&&field[from.x-1][from.y+1]->black==true&&field[from.x-2][from.y+2]==NULL){
             vector.push_back(Coordinates_t(from.x-2, from.y-2));
         }
     }
     //schwarz schlagen
-    if(field[from.x-1][from.y+1]!=NULL&&from.x>1&&from.y<6){
-        if(field[from.x][from.y]->state==false&&field[from.x][from.y]->black==true&&field[from.x-1][from.y+1]->black==false&&field[from.x-2][from.y+2]==NULL){
+    if(field[from.x+1][from.y-1]!=NULL&&from.y>1&&from.x<6){
+        if(field[from.x][from.y]->state==false&&field[from.x][from.y]->black==true&&field[from.x+1][from.y-1]->black==false&&field[from.x+2][from.y-2]==NULL){
             vector.push_back(Coordinates_t(from.x-2, from.y+2));
         }
     }
-    if(field[from.x+1][from.y+1]!=NULL&&from.x<6&&from.y<6){
+    if(field[from.x+1][from.y+1]!=NULL&&from.y<6&&from.x<6){
         if(field[from.x][from.y]->state==false&&field[from.x][from.y]->black==true&&field[from.x+1][from.y+1]->black==false&&field[from.x+2][from.y+2]==NULL){
             vector.push_back(Coordinates_t(from.x-2, from.y+2));
         }
