@@ -26,7 +26,8 @@ void View::printHelp(){
                 << "move <fromx><fromy> <tox><toy> (move a3 b4)" << std::endl
                 << "    Ziehe einen Stein an eine andere Position." << std::endl
                 << "hint <fromx><fromy>" << std::endl
-                << "    Lass dir die Möglichen Zuge eines Steines anzeigen" << std::endl;
+                << "    Lass dir die Möglichen Zuge eines Steines anzeigen" << std::endl
+                << "Sollte es Probleme bei der Darstellung des Spielfeldes geben, dann passe bitte die Datei view.hpp an."<<std::endl;
 }
 
 void View::printMenu(){
