@@ -16,6 +16,7 @@ void Robot::nextMove(){
                         if(move.benefit>bestMove.benefit){
                             bestMove=move;
                         }
+                        possmoves.push_back(move);
                     }
                 }
             }
