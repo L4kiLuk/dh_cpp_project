@@ -26,8 +26,7 @@ public:
     Robot(Matchfield** pMatchfield){matchfield = (*pMatchfield);}
     void nextMove();    //Makes the best move for the Robot.
     int evaluateMove(Coordinates from, Coordinates to); //returns a nubmer based on how good a move is.
-    std::vector<PossibleMove> findMoves(PossibleMove from);
-    std::vector<PossibleMove> findMoves(Coordinates from, Coordinates origin);
+    std::vector<PossibleMove> findMoves(PossibleMove from,int heading);
 
 };
 

@@ -54,6 +54,7 @@ public:
     void printMenu();
     void printAutosaveFound();
     void printVictory();
+    void printField();
     
 };
 
