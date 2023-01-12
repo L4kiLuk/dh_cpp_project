@@ -53,7 +53,7 @@ public:
     void printHelp();
     void printMenu();
     void printAutosaveFound();
-
+    void printVictory();
     
 };
 

@@ -37,9 +37,9 @@ void Controller::init(){
         }
     }
     //Open the Input
-    view->printMenu();
     char inputCommand;
     while(1){
+        view->printMenu();  
         std::cin >> inputCommand;
         //Handle the menu
         switch(inputCommand){
@@ -121,8 +121,8 @@ void Controller::startGame(){
             }else{
                 view->render("Dieser Zug ist nicht Möglich");
             }
-            /* Spielablauf mit try catch
-            try{
+             //Spielablauf mit try catch
+            /*try{
                 matchfield->move(Coordinates_t(7-(nextMove.at(6)-'1'),nextMove.at(5)-'a'),Coordinates_t(7-(nextMove.at(9)-'1'),nextMove.at(8)-'a'));
                 view->render("Zug erfolgreich!");
                 if(withComputer&&matchfield->getActualPlayer()==0){
@@ -132,7 +132,8 @@ void Controller::startGame(){
             }catch(){// Fehlerhafter Zug
 
             }catch(){//Spielende
-
+                isRunning = false;
+                view->printVictory();
             }*/
         }
         else if(std::regex_match(nextMove,hint_pat)){
@@ -144,6 +145,9 @@ void Controller::startGame(){
         }        
         else{
             view->render("Falscher Befehl!");
+            view->printVictory();
+            isRunning = false;
+            std::getline(std::cin, nextMove);
         }
         
     }
