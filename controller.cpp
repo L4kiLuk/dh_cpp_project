@@ -32,8 +32,6 @@ void Controller::init(){
         std::cin>> input;
         if(input=='y'){
             loadGame(AUTOSAVEFILE);
-            std::remove(AUTOSAVEFILE);
-            startGame();
         }
     }
     //Open the Input
@@ -48,7 +46,13 @@ void Controller::init(){
                 newGame();
                 break;
             case '2':
-                //Load Autosave
+                //Load Savegame
+                {
+                    std::cout<<"Gib eine Datei an!"<<std::endl;
+                    std::string file;
+                    std::cin >> file;
+                    loadGame(file);
+                }
                 break;
             case '3':
                 exit(1);
@@ -88,8 +92,29 @@ void Controller::loadGame(std::string file){
             }
         }
     }
+    ifs.close();
+    if(file.compare(AUTOSAVEFILE)){
+        std::remove(AUTOSAVEFILE);
+    }
+    startGame();
     
     
+}
+
+void Controller::saveGame(std::string file){
+    std::ofstream ostream(file+".sgf");
+    ostream<<(*Controller::sigObj)->getActualPlayer()<<std::endl;
+    for(int x=0;x<8;x++){
+        for(int y=0;y<8;y++){
+            if((*Controller::sigObj)->field[x][y]==NULL){
+                ostream<<"#";
+            }else {
+                ostream<<(*Controller::sigObj)->field[x][y]->black<<(*Controller::sigObj)->field[x][y]->state;
+            }
+        }
+        ostream << std::endl;
+    }
+    ostream.close();
 }
 
 void Controller::startGame(){
@@ -110,6 +135,7 @@ void Controller::startGame(){
         std::regex move_pat("move [a-h][1-8] [a-h][1-8]");
         std::regex hint_pat("hint [a-h][1-8]");
         std::regex help_pat("help");
+        std::regex save_pat("save");
         if(std::regex_match(nextMove,move_pat)){
             try{
                 matchfield->move(Coordinates_t(7-(nextMove.at(6)-'1'),nextMove.at(5)-'a'),Coordinates_t(7-(nextMove.at(9)-'1'),nextMove.at(8)-'a'));
@@ -129,12 +155,19 @@ void Controller::startGame(){
         }
         else if (std::regex_match(nextMove,help_pat)){
             view->printHelp();
-        }        
+        }
+        else if (std::regex_match(nextMove,save_pat)){
+            std::cout<<"Gibt einen Namen für die Datei ein:"<<std::endl;
+            std::cin>> nextMove;
+            saveGame(nextMove);
+        }
         else{
             view->render("Falscher Befehl!");
         }
         
     }
+    //Aufräumarbeiten
+    delete matchfield;
 }
 
 void Controller::saveHighscore(std::string playerName,int score){
@@ -174,6 +207,7 @@ void signal_handler(int signal){
         }
         ostream << std::endl;
     }
+    ostream.close();
     std::exit(5);
 }
 
