@@ -20,7 +20,7 @@ private:
 public:
 struct Coordinates;
     Stone* field[8][8];
-    bool move(Coordinates_t from, Coordinates_t to);
+    void move(Coordinates_t from, Coordinates_t to);
     std::vector<Coordinates_t> hint(Coordinates_t from, bool beat_only);
     std::vector<Coordinates_t> hint(Coordinates_t from);
     void init();
