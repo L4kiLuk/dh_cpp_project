@@ -32,6 +32,7 @@ public:
     void init();
     void newGame();
     void loadGame(std::string file);
+    void saveGame(std::string file);
     void startGame();
     void saveHighscore(std::string playerName,int score);
     std::vector<Highscore> loadHighscores();
