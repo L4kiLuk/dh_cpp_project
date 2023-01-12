@@ -8,12 +8,18 @@
 #define EMPTYWHITEFIELD "\033[47m  \033[0m"
 #define BLACKSTONE "\033[40;31m⭗ \033[0m" //Zeichen gerne auswechseln, sollte es nicht schön angezeigt werden
 #define WHITESTONE "\033[40;37m⭗ \033[0m" //Zeichen gerne auswechseln, sollte es nicht schön angezeigt werden
+#define BLACKDAME "\033[40;31mⒹ \033[0m" //Zeichen gerne auswechseln, sollte es nicht schön angezeigt werden
+#define WHITEDAME "\033[40;37mⒹ \033[0m" //Zeichen gerne auswechseln, sollte es nicht schön angezeigt werden
+#define HINTSTONE "\033[40;35m⭗ \033[0m" //Zeichen gerne auswechseln, sollte es nicht schön angezeigt werden
 #else
 #define CLEARCONSOLE 
 #define EMPTYBLACKFIELD "  "
 #define EMPTYWHITEFIELD "  "
 #define BLACKSTONE "0 "
 #define WHITESTONE "1 "
+#define BLACKDAME "00" 
+#define WHITEDAME "11" 
+#define HINTSTONE "00" 
 #endif
 /*
   0   0   0   0 
