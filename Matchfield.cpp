@@ -11,9 +11,71 @@
 
 //noch unvollständig, bei erfolgreichem Zug bitte changeActualPlayer aufrufen. Den Methodenaufruf dann aus Contoller startGame() ausbauen.
 bool Matchfield::move(Coordinates_t from, Coordinates_t to){
-    field[to.x][to.y]=field[from.x][from.y];
-    field[from.x][from.y]=NULL;
-    changeActualPlayer();
+    //kontrolle
+    if(field[from.x][from.y] == NULL ){
+        std::cout << "Fehler, Spielstein position ungültig"; //Bitte als exeption oder so. Das kann die Anzeige zerstören. Schreiben sollte nur der Controller.
+        return false;
+    }else {
+        //black -> nach unten
+        if (actualPlayer==0 &&(to.y==from.y+1)&&(to.x==from.x-1||to.x==from.x+1) && field[to.x][to.y] == NULL && field[from.x][from.y]->black==true)
+        {
+            field[to.x][to.y]=field[from.x][from.y];
+            field[from.x][from.y] = NULL;
+            changeActualPlayer();
+            return true;
+        }
+        else if(actualPlayer==0 &&(to.y==from.y+2)&&(to.x==from.x-2||to.x==from.x+2)&&field[to.x][to.y]==NULL&& field[from.x+(to.x-from.x)][from.y+(to.y-from.y)]->black==false && field[from.x][from.y]->black==true){
+            field[to.x][to.y]=field[from.x][from.y];
+            field[from.x][from.y] = NULL;
+            field[from.x+(to.x-from.x)][from.y+(to.y-from.y)] = NULL;
+            //check for another move
+            if(hint(to, true).size() == 0){
+                changeActualPlayer();
+            }
+            return true;
+
+        }
+        //weiß unten nach oben
+        else if (actualPlayer==1 &&(to.y==from.y-1)&&(to.x==from.x-1||to.x==from.x+1) && field[to.x][to.y] == NULL && field[from.x][from.y]->black==true)
+        {
+            field[to.x][to.y]=field[from.x][from.y];
+            field[from.x][from.y] = NULL;
+            changeActualPlayer();
+            return true;
+        }
+        else if(actualPlayer==1 &&(to.y==from.y-2)&&(to.x==from.x-2||to.x==from.x+2)&&field[to.x][to.y]==NULL&& field[from.x+(to.x-from.x)][from.y+(to.y-from.y)]->black!=field[from.x][from.y]->black && field[from.x][from.y]->black==true){
+            field[to.x][to.y]=field[from.x][from.y];
+            field[from.x][from.y] = NULL;
+            field[from.x+(to.x-from.x)][from.y+(to.y-from.y)] = NULL;
+            //check for another move
+            if(hint(to, true).size() == 0){
+                changeActualPlayer();
+            }
+            
+            return true;
+        
+        } //dame
+        else if(field[from.x][from.y]->state == true){
+            for(Coordinates_t coord : hint(from)){
+                if(coord.x == to.x && coord.y == to.y){
+                    if(hint(to, true).size() == 0){
+                        changeActualPlayer();
+                    }
+                    return true;
+                }
+            }
+        }
+        //weiß zu Dame
+        if(field[to.x][to.y]->black==false &&  field[to.x][to.y]->state==false && actualPlayer == 0 && from.y == 1 && to.y ==0){
+            field[to.x][to.y]-> state = true;
+        }
+        //schwarz zu Dame 
+        else if(field[to.x][to.y]->black==true &&  field[to.x][to.y]->state==false && actualPlayer == 1 && from.y == 6 && to.y ==7){
+            field[to.x][to.y]-> state = true;
+        }
+        
+    }
+
 }
 
 std::vector<Coordinates_t> Matchfield::hint(Coordinates_t from){
