@@ -24,13 +24,9 @@
 1   1   1   1   
   1   1   1   1 
 1   1   1   1   
-
-
 ⎡      ⎤
 ⎢      ⎥
 ⎣      ⎦
-
-
 */
 
 #include <iostream>
@@ -53,7 +49,8 @@ public:
     void printHelp();
     void printMenu();
     void printAutosaveFound();
-
+    void printVictory();
+    void printField();
     
 };
 
