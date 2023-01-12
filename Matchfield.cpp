@@ -18,12 +18,12 @@ void Matchfield::move(Coordinates_t from, Coordinates_t to){
         throw WrongMoveException();
     }else {
         //weiß zu Dame
-        if(field[to.x][to.y]->black==false &&  field[to.x][to.y]->state==false && actualPlayer == 0 && from.y == 1 && to.y ==0){
-            field[to.x][to.y]-> state = true;
+        if(field[from.x][from.y]->black==false &&  field[from.x][from.y]->state==false && actualPlayer == 0 && from.y == 1 && to.y ==0){
+            field[from.x][from.y]-> state = true;
         }
         //schwarz zu Dame 
-        else if(field[to.x][to.y]->black==true &&  field[to.x][to.y]->state==false && actualPlayer == 1 && from.y == 6 && to.y ==7){
-            field[to.x][to.y]-> state = true;
+        else if(field[from.x][from.y]->black==true &&  field[from.x][from.y]->state==false && actualPlayer == 1 && from.y == 6 && to.y ==7){
+            field[from.x][from.y]-> state = true;
         }
         //black -> nach unten
         if (actualPlayer==0 &&(to.y==from.y+1)&&(to.x==from.x-1||to.x==from.x+1) && field[to.x][to.y] == NULL && field[from.x][from.y]->black==true)
