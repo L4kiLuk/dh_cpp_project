@@ -111,7 +111,7 @@ void Controller::startGame(){
         std::regex hint_pat("hint [a-h][1-8]");
         std::regex help_pat("help");
         if(std::regex_match(nextMove,move_pat)){
-            if(matchfield->move(Coordinates_t(7-(nextMove.at(6)-'1'),nextMove.at(5)-'a'),Coordinates_t(7-(nextMove.at(9)-'1'),nextMove.at(8)-'a'))){
+            /*if(matchfield->move(Coordinates_t(7-(nextMove.at(6)-'1'),nextMove.at(5)-'a'),Coordinates_t(7-(nextMove.at(9)-'1'),nextMove.at(8)-'a'))){
                 //matchfield->changeActualPlayer(); //Ausbauen sobald in move() gewechselt wird.
                 view->render("Zug erfolgreich!");
                 if(withComputer&&matchfield->getActualPlayer()==0){
@@ -121,7 +121,7 @@ void Controller::startGame(){
             }else{
                 view->render("Dieser Zug ist nicht Möglich");
             }
-            /* Spielablauf mit try catch
+            /* Spielablauf mit try catch */
             try{
                 matchfield->move(Coordinates_t(7-(nextMove.at(6)-'1'),nextMove.at(5)-'a'),Coordinates_t(7-(nextMove.at(9)-'1'),nextMove.at(8)-'a'));
                 view->render("Zug erfolgreich!");
@@ -129,11 +129,11 @@ void Controller::startGame(){
                     robot.nextMove();
                     view->render();
                 }
-            }catch(){// Fehlerhafter Zug
+            }catch(WrongMoveException){// Fehlerhafter Zug
 
-            }catch(){//Spielende
+            }catch(GameEndException){//Spielende
 
-            }*/
+            }
         }
         else if(std::regex_match(nextMove,hint_pat)){
             //matchfield->hint(Coordinates_t(nextMove.at(6)-'a',nextMove.at(5)-'1'));

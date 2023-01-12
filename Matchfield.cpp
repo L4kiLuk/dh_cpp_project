@@ -2,6 +2,7 @@
 #if !defined(Matchfield_C)
 #define Matchfield_C
 
+#include "Exceptions.hpp"
 #include "Matchfield.hpp"
 #include <string>
 #include <iostream> 
@@ -10,19 +11,27 @@
 
 
 //noch unvollständig, bei erfolgreichem Zug bitte changeActualPlayer aufrufen. Den Methodenaufruf dann aus Contoller startGame() ausbauen.
-bool Matchfield::move(Coordinates_t from, Coordinates_t to){
+void Matchfield::move(Coordinates_t from, Coordinates_t to){
     //kontrolle
     if(field[from.x][from.y] == NULL ){
         std::cout << "Fehler, Spielstein position ungültig"; //Bitte als exeption oder so. Das kann die Anzeige zerstören. Schreiben sollte nur der Controller.
-        return false;
+        throw WrongMoveException();
     }else {
+        //weiß zu Dame
+        if(field[to.x][to.y]->black==false &&  field[to.x][to.y]->state==false && actualPlayer == 0 && from.y == 1 && to.y ==0){
+            field[to.x][to.y]-> state = true;
+        }
+        //schwarz zu Dame 
+        else if(field[to.x][to.y]->black==true &&  field[to.x][to.y]->state==false && actualPlayer == 1 && from.y == 6 && to.y ==7){
+            field[to.x][to.y]-> state = true;
+        }
         //black -> nach unten
         if (actualPlayer==0 &&(to.y==from.y+1)&&(to.x==from.x-1||to.x==from.x+1) && field[to.x][to.y] == NULL && field[from.x][from.y]->black==true)
         {
             field[to.x][to.y]=field[from.x][from.y];
             field[from.x][from.y] = NULL;
             changeActualPlayer();
-            return true;
+            
         }
         else if(actualPlayer==0 &&(to.y==from.y+2)&&(to.x==from.x-2||to.x==from.x+2)&&field[to.x][to.y]==NULL&& field[from.x+(to.x-from.x)][from.y+(to.y-from.y)]->black==false && field[from.x][from.y]->black==true){
             field[to.x][to.y]=field[from.x][from.y];
@@ -32,7 +41,6 @@ bool Matchfield::move(Coordinates_t from, Coordinates_t to){
             if(hint(to, true).size() == 0){
                 changeActualPlayer();
             }
-            return true;
 
         }
         //weiß unten nach oben
@@ -41,7 +49,6 @@ bool Matchfield::move(Coordinates_t from, Coordinates_t to){
             field[to.x][to.y]=field[from.x][from.y];
             field[from.x][from.y] = NULL;
             changeActualPlayer();
-            return true;
         }
         else if(actualPlayer==1 &&(to.y==from.y-2)&&(to.x==from.x-2||to.x==from.x+2)&&field[to.x][to.y]==NULL&& field[from.x+(to.x-from.x)][from.y+(to.y-from.y)]->black!=field[from.x][from.y]->black && field[from.x][from.y]->black==true){
             field[to.x][to.y]=field[from.x][from.y];
@@ -51,28 +58,41 @@ bool Matchfield::move(Coordinates_t from, Coordinates_t to){
             if(hint(to, true).size() == 0){
                 changeActualPlayer();
             }
-            
-            return true;
         
         } //dame
-        else if(field[from.x][from.y]->state == true){
+        else if(field[from.x][from.y]->state == true && field[from.x][from.y]->black==!actualPlayer){
             for(Coordinates_t coord : hint(from)){
                 if(coord.x == to.x && coord.y == to.y){
                     if(hint(to, true).size() == 0){
                         changeActualPlayer();
                     }
-                    return true;
                 }
             }
         }
-        //weiß zu Dame
-        if(field[to.x][to.y]->black==false &&  field[to.x][to.y]->state==false && actualPlayer == 0 && from.y == 1 && to.y ==0){
-            field[to.x][to.y]-> state = true;
+        int movesblack = 0;
+        int moveswhite = 0;
+        for (int i = 0; i < 8; i++)
+        {
+            for (int j = 0; j < 8; j++)
+            {
+                if(field[i][j]->black){
+                    
+                movesblack += hint(Coordinates_t(i,j)).size();
+                }
+                else if(!field[i][j]->black){
+                    moveswhite += hint(Coordinates_t(i,j)).size();
+                }
+            }
+            
         }
-        //schwarz zu Dame 
-        else if(field[to.x][to.y]->black==true &&  field[to.x][to.y]->state==false && actualPlayer == 1 && from.y == 6 && to.y ==7){
-            field[to.x][to.y]-> state = true;
+        if (movesblack == 0 || moveswhite ==0)
+        {
+            throw GameEndException();
+        }else{
+
+        throw WrongMoveException();
         }
+        
         
     }
 
