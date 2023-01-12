@@ -129,10 +129,10 @@ void Controller::startGame(){
                     robot.nextMove();
                     view->render();
                 }
-            }catch(WrongMoveException){// Fehlerhafter Zug
-
+            }catch(WrongMoveException ex){// Fehlerhafter Zug
+                view->render(ex.info());
             }catch(GameEndException){//Spielende
-
+                view->printVictory();
             }
         }
         else if(std::regex_match(nextMove,hint_pat)){
