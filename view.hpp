@@ -50,6 +50,7 @@ public:
     View(Matchfield** ptr_gamefield): gamefield(ptr_gamefield){};
     void render();
     void render(std::string message);
+    void render(std::string message, std::vector<Coordinates> hints);
     void setOptMessage(std::string message){optmessage=message;} //Set a message to print at the next rendering. Message will be deleted after the next call of render()
     void printWelcomeMessage();
     void printHelp();

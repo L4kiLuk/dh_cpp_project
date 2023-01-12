@@ -16,6 +16,42 @@ void View::render(std::string message){
     render();
 }
 
+void View::render(std::string message, std::vector<Coordinates> hints){
+    std::cout << " a b c d e f g h"<<std::endl;
+    for(int x=0;x<8;x++){
+        std::cout << 8-x;
+        for(int y=0;y<8;y++){
+            for(Coordinates coord:hints){
+                if(coord.x==x&&coord.y==y){
+                    std::cout <<EMPTYBLACKFIELD;
+                    continue;
+                }
+            }
+            if((*gamefield)->field[x][y]==NULL){
+                if((x+y)%2){
+                    std::cout <<EMPTYBLACKFIELD; 
+                }else{
+                    std::cout <<EMPTYWHITEFIELD;
+                }
+            }else if((*gamefield)->field[x][y]->black){
+                if((*gamefield)->field[x][y]->state){
+                    std::cout << BLACKDAME;
+                }else{
+                    std::cout <<BLACKSTONE;
+                }
+            }else{
+                if((*gamefield)->field[x][y]->state){
+                    std::cout << WHITEDAME;
+                }else{
+                    std::cout <<WHITESTONE;
+                }
+            }
+        }
+        std::cout <<8-x<< std::endl;
+    }
+    std::cout << " a b c d e f g h"<<std::endl;
+}
+
 void View::printWelcomeMessage(){
     std::cout << "Willkommen zu Dame. \n Wir freuen uns, dass du unser Spiel spielen willst. \n Wenn du Hilfe brauchst, schreibe einfach \"help\".\n";
 }
