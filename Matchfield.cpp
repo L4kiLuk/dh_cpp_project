@@ -120,6 +120,9 @@ std::vector<Coordinates_t> Matchfield::hint(Coordinates_t from){
 //noch unvollständig
 std::vector<Coordinates> Matchfield::hint(Coordinates_t from, bool beat_only){
     std::vector<Coordinates_t> vector;
+    if(field[from.x][from.y]==NULL){
+        return vector;
+    }
     //weiß schlagen
     if(field[from.x-1][from.y-1]!=NULL&&from.y>1&&from.x>1){
         if(field[from.x][from.y]->state==false&&field[from.x][from.y]->black==false&&field[from.x-1][from.y-1]->black==true&&field[from.x-2][from.y-2]==NULL){
@@ -230,6 +233,7 @@ std::vector<Coordinates> Matchfield::hint(Coordinates_t from, bool beat_only){
         }
     }
    
+    int i = 0;
     return vector;
 }
 
