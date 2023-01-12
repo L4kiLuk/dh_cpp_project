@@ -14,7 +14,7 @@
 void Matchfield::move(Coordinates_t from, Coordinates_t to){
     //kontrolle
     if(field[from.x][from.y] == NULL ){
-        std::cout << "Fehler, Spielstein position ungültig"; //Bitte als exeption oder so. Das kann die Anzeige zerstören. Schreiben sollte nur der Controller.
+        //std::cout << "Fehler, Spielstein position ungültig"; //Bitte als exeption oder so. Das kann die Anzeige zerstören. Schreiben sollte nur der Controller.
         throw WrongMoveException();
     }else {
         //weiß zu Dame
@@ -75,13 +75,16 @@ void Matchfield::move(Coordinates_t from, Coordinates_t to){
         {
             for (int j = 0; j < 8; j++)
             {
-                if(field[i][j]->black){
-                    
-                movesblack += hint(Coordinates_t(i,j)).size();
+                if(field[i][j]!= NULL){
+                    if(field[i][j]->black){
+                        
+                    movesblack += hint(Coordinates_t(i,j)).size();
+                    }
+                    else if(!field[i][j]->black){
+                        moveswhite += hint(Coordinates_t(i,j)).size();
+                    }
                 }
-                else if(!field[i][j]->black){
-                    moveswhite += hint(Coordinates_t(i,j)).size();
-                }
+                
             }
             
         }
@@ -106,18 +109,26 @@ std::vector<Coordinates_t> Matchfield::hint(Coordinates_t from){
 std::vector<Coordinates> Matchfield::hint(Coordinates_t from, bool beat_only){
     std::vector<Coordinates_t> vector;
     //weiß schlagen
-    if(field[from.x][from.y]->state==false&&field[from.x][from.y]->black==false&&field[from.x-1][from.y-1]->black==true&&field[from.x-2][from.y-2]==NULL){
-        vector.push_back(Coordinates_t(from.x-2, from.y-2));
+    if(field[from.x-1][from.y-1]!=NULL&&from.x>1&&from.y>1){
+        if(field[from.x][from.y]->state==false&&field[from.x][from.y]->black==false&&field[from.x-1][from.y-1]->black==true&&field[from.x-2][from.y-2]==NULL){
+            vector.push_back(Coordinates_t(from.x-2, from.y-2));
+        }
     }
-    if(field[from.x][from.y]->state==false&&field[from.x][from.y]->black==false&&field[from.x+1][from.y-1]->black==true&&field[from.x+2][from.y-2]==NULL){
-        vector.push_back(Coordinates_t(from.x-2, from.y-2));
+    if(field[from.x+1][from.y-1]!=NULL&&from.x<6&&from.y>1){
+        if(field[from.x][from.y]->state==false&&field[from.x][from.y]->black==false&&field[from.x+1][from.y-1]->black==true&&field[from.x+2][from.y-2]==NULL){
+            vector.push_back(Coordinates_t(from.x-2, from.y-2));
+        }
     }
     //schwarz schlagen
-     if(field[from.x][from.y]->state==false&&field[from.x][from.y]->black==true&&field[from.x-1][from.y+1]->black==false&&field[from.x-2][from.y+2]==NULL){
-        vector.push_back(Coordinates_t(from.x-2, from.y+2));
+    if(field[from.x-1][from.y+1]!=NULL&&from.x>1&&from.y<6){
+        if(field[from.x][from.y]->state==false&&field[from.x][from.y]->black==true&&field[from.x-1][from.y+1]->black==false&&field[from.x-2][from.y+2]==NULL){
+            vector.push_back(Coordinates_t(from.x-2, from.y+2));
+        }
     }
-    if(field[from.x][from.y]->state==false&&field[from.x][from.y]->black==true&&field[from.x+1][from.y+1]->black==false&&field[from.x+2][from.y+2]==NULL){
-        vector.push_back(Coordinates_t(from.x-2, from.y+2));
+    if(field[from.x+1][from.y+1]!=NULL&&from.x<6&&from.y<6){
+        if(field[from.x][from.y]->state==false&&field[from.x][from.y]->black==true&&field[from.x+1][from.y+1]->black==false&&field[from.x+2][from.y+2]==NULL){
+            vector.push_back(Coordinates_t(from.x-2, from.y+2));
+        }
     }
 
     if(beat_only == true){
@@ -125,19 +136,27 @@ std::vector<Coordinates> Matchfield::hint(Coordinates_t from, bool beat_only){
     }
     
     //schwarz normal
-    if(field[from.x][from.y]->state==false&&field[from.x][from.y]->black==false&&field[from.x+1][from.y-1]==NULL){
-        //vector.push_back(new Coordinates_t(from.x+1, from.y-1));
+    if(from.x<7&&from.y>0){
+        if(field[from.x][from.y]->state==false&&field[from.x][from.y]->black==false&&field[from.x+1][from.y-1]==NULL){
+            vector.push_back(Coordinates_t(from.x+1, from.y-1));
+        }
     }
-    if(field[from.x][from.y]->state==false&&field[from.x][from.y]->black==false&&field[from.x-1][from.y-1]==NULL){
-        //vector.push_back(new Coordinates_t(from.x-1, from.y-1));
+    if(from.x>0&&from.y>0){
+        if(field[from.x][from.y]->state==false&&field[from.x][from.y]->black==false&&field[from.x-1][from.y-1]==NULL){
+            vector.push_back(Coordinates_t(from.x-1, from.y-1));
+        }
     }
     
     //weiß normal
-    if(field[from.x][from.y]->state==false&&field[from.x][from.y]->black==true&&field[from.x+1][from.y+1]==NULL){
-        //vector.push_back(new Coordinates_t(from.x+1, from.y+1));
+    if(from.x<7&&from.y<7){
+        if(field[from.x][from.y]->state==false&&field[from.x][from.y]->black==true&&field[from.x+1][from.y+1]==NULL){
+            vector.push_back(Coordinates_t(from.x+1, from.y+1));
+        }
     }
-    if(field[from.x][from.y]->state==false&&field[from.x][from.y]->black==true&&field[from.x-1][from.y+1]==NULL){
-        //vector.push_back(new Coordinates_t(from.x-1, from.y+1));
+    if(from.x>0&&from.y<7){
+        if(field[from.x][from.y]->state==false&&field[from.x][from.y]->black==true&&field[from.x-1][from.y+1]==NULL){
+            vector.push_back(Coordinates_t(from.x-1, from.y+1));
+        }
     }
     
     
