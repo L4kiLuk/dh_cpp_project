@@ -23,7 +23,7 @@ void Robot::nextMove(){
             }
         }
     }
-   bool result = matchfield->move(bestMove.from,bestMove.to);
+   matchfield->move(bestMove.from,bestMove.to);
 }
 
 std::vector<PossibleMove> Robot::findMoves(PossibleMove posMove,int heading){//heading:0,No,1,Left,2,Right,3,-Left,4,-Right
