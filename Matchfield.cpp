@@ -65,6 +65,14 @@ bool Matchfield::move(Coordinates_t from, Coordinates_t to){
                 }
             }
         }
+        //weiß zu Dame
+        if(field[to.x][to.y]->black==false &&  field[to.x][to.y]->state==false && actualPlayer == 0 && from.y == 1 && to.y ==0){
+            field[to.x][to.y]-> state = true;
+        }
+        //schwarz zu Dame 
+        else if(field[to.x][to.y]->black==true &&  field[to.x][to.y]->state==false && actualPlayer == 1 && from.y == 6 && to.y ==7){
+            field[to.x][to.y]-> state = true;
+        }
         
     }
 
@@ -80,17 +88,18 @@ std::vector<Coordinates_t> Matchfield::hint(Coordinates_t from, bool beat_only){
     
     //weiß schlagen
     if(field[from.x][from.y]->state==false&&field[from.x][from.y]->black==false&&field[from.x-1][from.y-1]->black==true&&field[from.x-2][from.y-2]==NULL){
-        //vector.push_back(new Coordinates_t(from.x-2, from.y-2));
+        vector.push_back(Coordinates_t(from.x-2, from.y-2));
+        
     }
     if(field[from.x][from.y]->state==false&&field[from.x][from.y]->black==false&&field[from.x+1][from.y-1]->black==true&&field[from.x+2][from.y-2]==NULL){
-        //vector.push_back(new Coordinates_t(from.x-2, from.y-2));
+        vector.push_back(Coordinates_t(from.x-2, from.y-2));
     }
     //schwarz schlagen
      if(field[from.x][from.y]->state==false&&field[from.x][from.y]->black==true&&field[from.x-1][from.y+1]->black==false&&field[from.x-2][from.y+2]==NULL){
-        //vector.push_back(new Coordinates_t(from.x-2, from.y+2));
+        vector.push_back(Coordinates_t(from.x-2, from.y+2));
     }
     if(field[from.x][from.y]->state==false&&field[from.x][from.y]->black==true&&field[from.x+1][from.y+1]->black==false&&field[from.x+2][from.y+2]==NULL){
-        //vector.push_back(new Coordinates_t(from.x-2, from.y+2));
+        vector.push_back(Coordinates_t(from.x-2, from.y+2));
     }
 
     if(beat_only == true){
@@ -99,18 +108,18 @@ std::vector<Coordinates_t> Matchfield::hint(Coordinates_t from, bool beat_only){
     
     //schwarz normal
     if(field[from.x][from.y]->state==false&&field[from.x][from.y]->black==false&&field[from.x+1][from.y-1]==NULL){
-        //vector.push_back(new Coordinates_t(from.x+1, from.y-1));
+        vector.push_back(Coordinates_t(from.x+1, from.y-1));
     }
     if(field[from.x][from.y]->state==false&&field[from.x][from.y]->black==false&&field[from.x-1][from.y-1]==NULL){
-        //vector.push_back(new Coordinates_t(from.x-1, from.y-1));
+        vector.push_back(Coordinates_t(from.x-1, from.y-1));
     }
     
     //weiß normal
     if(field[from.x][from.y]->state==false&&field[from.x][from.y]->black==true&&field[from.x+1][from.y+1]==NULL){
-        //vector.push_back(new Coordinates_t(from.x+1, from.y+1));
+        vector.push_back(Coordinates_t(from.x+1, from.y+1));
     }
     if(field[from.x][from.y]->state==false&&field[from.x][from.y]->black==true&&field[from.x-1][from.y+1]==NULL){
-        //vector.push_back(new Coordinates_t(from.x-1, from.y+1));
+        vector.push_back(Coordinates_t(from.x-1, from.y+1));
     }
     
     
@@ -128,9 +137,9 @@ std::vector<Coordinates_t> Matchfield::hint(Coordinates_t from, bool beat_only){
         maxSteps = (maxX<maxY)?maxX:maxY;
         for(int i = 0; i<maxSteps; i++){
             if(field[from.x+i][from.y+i]==NULL&&beat_only==false){
-                //vector.push_back(new Coordinates_t(from.x+i, from.y+i));
+                vector.push_back(Coordinates_t(from.x+i, from.y+i));
             }else if(field[from.x+i+1][from.y+i+1]==NULL&&field[from.x+i][from.y+i]->black==!field[from.x][from.y]->black){
-                //vector.push_back(new Coordinates_t(from.x+i+1, from.y+i+1));
+                vector.push_back(Coordinates_t(from.x+i+1, from.y+i+1));
                 break;
             }
         }
@@ -140,9 +149,9 @@ std::vector<Coordinates_t> Matchfield::hint(Coordinates_t from, bool beat_only){
         maxSteps = (maxX<maxY)?maxX:maxY;
         for(int i = 0; i<maxSteps; i++){
             if(field[from.x-i][from.y+i]==NULL&&beat_only==false){
-                //vector.push_back(new Coordinates_t(from.x-i, from.y+i));
+                vector.push_back(Coordinates_t(from.x-i, from.y+i));
             }else if(field[from.x-i-1][from.y+i+1]==NULL&&field[from.x-i][from.y+i]->black==!field[from.x][from.y]->black){
-                //vector.push_back(new Coordinates_t(from.x-i-1, from.y+i+1));
+                vector.push_back(Coordinates_t(from.x-i-1, from.y+i+1));
                 break;
             }
         }
@@ -152,9 +161,9 @@ std::vector<Coordinates_t> Matchfield::hint(Coordinates_t from, bool beat_only){
         maxSteps = (maxX<maxY)?maxX:maxY;
         for(int i = 0; i<maxSteps; i++){
             if(field[from.x+i][from.y-i]==NULL&&beat_only==false){
-                //vector.push_back(new Coordinates_t(from.x+i, from.y-i));
+                vector.push_back(Coordinates_t(from.x+i, from.y-i));
             }else if(field[from.x+i+1][from.y-i-1]==NULL&&field[from.x+i][from.y+i]->black==!field[from.x][from.y]->black){
-                //vector.push_back(new Coordinates_t(from.x+i+1, from.y-i-1));
+                vector.push_back(Coordinates_t(from.x+i+1, from.y-i-1));
                 break;
             }
         }
@@ -164,9 +173,9 @@ std::vector<Coordinates_t> Matchfield::hint(Coordinates_t from, bool beat_only){
         maxSteps = (maxX<maxY)?maxX:maxY;
         for(int i = 0; i<maxSteps; i++){
             if(field[from.x-i][from.y-i]==NULL&&beat_only==false){
-                //vector.push_back(new Coordinates_t(from.x-i, from.y-i));
+                vector.push_back(Coordinates_t(from.x-i, from.y-i));
             }else if(field[from.x-i-1][from.y-i-1]==NULL&&field[from.x-i][from.y-i]->black==!field[from.x][from.y]->black){
-                //vector.push_back(new Coordinates_t(from.x-i-1, from.y-i-1));
+                vector.push_back(Coordinates_t(from.x-i-1, from.y-i-1));
                 break;
             }
         }
