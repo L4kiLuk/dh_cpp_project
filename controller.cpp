@@ -148,6 +148,7 @@ void Controller::startGame(){
                 view->render(ex.info());
             }catch(GameEndException){//Spielende
                 view->printVictory();
+                //Save Highscore
             }
         }
         else if(std::regex_match(nextMove,hint_pat)){
