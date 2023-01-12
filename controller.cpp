@@ -116,7 +116,7 @@ void Controller::startGame(){
                 view->render("Zug erfolgreich!");
                 if(withComputer&&matchfield->getActualPlayer()==0){
                     robot.nextMove();
-                    view->render();
+                    view->render("Zug erfolgreich!");
                 }
             }catch(WrongMoveException ex){// Fehlerhafter Zug
                 view->render(ex.info());
