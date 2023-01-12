@@ -58,9 +58,17 @@ void View::printField(){
                     std::cout <<EMPTYWHITEFIELD;
                 }
             }else if((*gamefield)->field[x][y]->black){
-                std::cout << BLACKSTONE;
+                if((*gamefield)->field[x][y]->state){
+                    std::cout << BLACKDAME;
+                }else{
+                    std::cout <<BLACKSTONE;
+                }
             }else{
-                std::cout <<WHITESTONE;
+                if((*gamefield)->field[x][y]->state){
+                    std::cout << WHITEDAME;
+                }else{
+                    std::cout <<WHITESTONE;
+                }
             }
         }
         std::cout <<8-x<< std::endl;
