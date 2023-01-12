@@ -44,13 +44,13 @@ void Matchfield::move(Coordinates_t from, Coordinates_t to){
 
         }
         //weiß unten nach oben
-        else if (actualPlayer==1 &&(to.y==from.y-1)&&(to.x==from.x-1||to.x==from.x+1) && field[to.x][to.y] == NULL && field[from.x][from.y]->black==true)
+        else if (actualPlayer==1 &&(to.y==from.y-1)&&(to.x==from.x-1||to.x==from.x+1) && field[to.x][to.y] == NULL && field[from.x][from.y]->black==false)
         {
             field[to.x][to.y]=field[from.x][from.y];
             field[from.x][from.y] = NULL;
             changeActualPlayer();
         }
-        else if(actualPlayer==1 &&(to.y==from.y-2)&&(to.x==from.x-2||to.x==from.x+2)&&field[to.x][to.y]==NULL&& field[from.x+(to.x-from.x)][from.y+(to.y-from.y)]->black!=field[from.x][from.y]->black && field[from.x][from.y]->black==true){
+        else if(actualPlayer==1 &&(to.y==from.y-2)&&(to.x==from.x-2||to.x==from.x+2)&&field[to.x][to.y]==NULL&& field[from.x+(to.x-from.x)][from.y+(to.y-from.y)]->black!=field[from.x][from.y]->black && field[from.x][from.y]->black==false){
             field[to.x][to.y]=field[from.x][from.y];
             field[from.x][from.y] = NULL;
             field[from.x+(to.x-from.x)][from.y+(to.y-from.y)] = NULL;
