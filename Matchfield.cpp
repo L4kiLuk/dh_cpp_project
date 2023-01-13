@@ -131,7 +131,7 @@ std::vector<Coordinates> Matchfield::hint(Coordinates_t from, bool beat_only){
     }
     if(field[from.x-1][from.y+1]!=NULL&&from.y<6&&from.x>1){
         if(field[from.x][from.y]->state==false&&field[from.x][from.y]->black==false&&field[from.x-1][from.y+1]->black==true&&field[from.x-2][from.y+2]==NULL){
-            vector.push_back(Coordinates_t(from.x-2, from.y-2));
+            vector.push_back(Coordinates_t(from.x-2, from.y+2));
         }
     }
     //schwarz schlagen
