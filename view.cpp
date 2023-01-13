@@ -94,7 +94,7 @@ void View::printVictory(){
     std::cout << "Das Spiel ist entschieden!"<<std::endl;
     printField();
     std::cout << "Spieler " << (*gamefield)->getActualPlayer()<< " hat gewonnen!" <<std::endl
-    << "Es wurden "<< "Züge gebraucht. Möchtest du einen Highscoreeintrag? y/n"<<std::endl;
+    << "Es wurden "<<(*gamefield)->moves<< "Züge gebraucht. Möchtest du einen Highscoreeintrag? y/n"<<std::endl;
 }
 //Prints the field without anything else
 void View::printField(){

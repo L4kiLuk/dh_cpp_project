@@ -134,19 +134,19 @@ void Controller::startGame(){
         withComputer=true;
     }
     std::getline(std::cin,inputString);//Clear the line
-    matchfield->changeActualPlayer();//White begins
     view->render();
     while(1){
+        if(withComputer&&matchfield->getActualPlayer()==0){
+            std::this_thread::sleep_for(std::chrono::seconds(1));
+            robot.nextMove();
+            view->render("Zug erfolgreich!");
+            continue;
+        }
         std::getline(std::cin,inputString);
         if(std::regex_match(inputString,move_pat)){
             try{
                 matchfield->move(Coordinates_t(7-(inputString.at(6)-'1'),inputString.at(5)-'a'),Coordinates_t(7-(inputString.at(9)-'1'),inputString.at(8)-'a'));
                 view->render("Zug erfolgreich!");
-                if(withComputer&&matchfield->getActualPlayer()==0){
-                    std::this_thread::sleep_for(std::chrono::seconds(1));
-                    robot.nextMove();
-                    view->render("Zug erfolgreich!");
-                }
             }catch(WrongMoveException ex){// Fehlerhafter Zug
                 view->render(ex.info());
             }catch(GameEndException){//Spielende
@@ -155,30 +155,31 @@ void Controller::startGame(){
                 if(in == 'y'){
                     view->printLine("Gib einen Namen ein!");
                     std::cin>>inputString;
-                    saveHighscore(inputString,10);
+                    saveHighscore(inputString,matchfield->moves);
                 }
                 break;
             }
+            continue;
         }
-        else if(std::regex_match(inputString,hint_pat)){
+        if(std::regex_match(inputString,hint_pat)){
             view->render("Das sind die Mögliche Züge!",matchfield->hint(Coordinates_t(7-(inputString.at(6)-'1'),inputString.at(5)-'a')));
+            continue;
         }
-        else if (std::regex_match(inputString,help_pat)){
+        if(std::regex_match(inputString,help_pat)){
             view->printHelp();
+            continue;
         }
-        else if (std::regex_match(inputString,save_pat)){
+        if(std::regex_match(inputString,save_pat)){
             view->printLine("Gibt einen Namen für die Datei ein:");
             std::getline(std::cin,inputString);
             saveGame(inputString);
             view->render("Gespeichert");
+            continue;
         }
-        else if (std::regex_match(inputString,exit_pat)){
+        if(std::regex_match(inputString,exit_pat)){
             break;
         }
-        else{
-            view->render("Falscher Befehl!");
-        }
-        
+        view->render("Falscher Befehl!");        
     }
     //Aufräumarbeiten
     delete matchfield;

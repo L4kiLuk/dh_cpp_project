@@ -15,10 +15,11 @@ struct Coordinates
 class Matchfield
 {
 private:
-    int actualPlayer; //Track which player has the next move
+    int actualPlayer=1; //Track which player has the next move
     
 public:
 struct Coordinates;
+    int moves =0;
     Stone* field[8][8];
     void move(Coordinates_t from, Coordinates_t to);
     std::vector<Coordinates_t> hint(Coordinates_t from, bool beat_only);
