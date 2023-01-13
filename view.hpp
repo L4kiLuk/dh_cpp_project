@@ -52,7 +52,6 @@ class View
 {
 private:
     /* data */
-    std::string optmessage;
     Matchfield** gamefield;
 
     
@@ -61,7 +60,6 @@ public:
     void render();
     void render(std::string message);
     void render(std::string message, std::vector<Coordinates> hints);
-    void setOptMessage(std::string message){optmessage=message;} //Set a message to print at the next rendering. Message will be deleted after the next call of render()
     void printWelcomeMessage();
     void printHelp();
     void printMenu();
@@ -69,6 +67,7 @@ public:
     void printVictory();
     void printField();
     void printHighscore(std::vector<Highscore> highscores);
+    void printLine(std::string line);
     
 };
 
