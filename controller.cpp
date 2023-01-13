@@ -35,9 +35,9 @@ void Controller::init(){
         }
     }
     //Open the Input
-    view->printMenu();
     char inputCommand;
     while(1){
+        view->printMenu();
         std::cin >> inputCommand;
         //Handle the menu
         switch(inputCommand){
@@ -56,6 +56,12 @@ void Controller::init(){
                 break;
             case '3':
                 exit(1);
+                break;
+            case '4':
+                {view->printHighscore(loadHighscores());
+                std::string s;
+                std::getline(std::cin,s);
+                std::getline(std::cin,s);}
                 break;
             default:
                 std::cout <<"Bitte gib eine der oberen Möglichkeiten ein!"<<std::endl;
@@ -136,6 +142,7 @@ void Controller::startGame(){
         std::regex hint_pat("hint [a-h][1-8]");
         std::regex help_pat("help");
         std::regex save_pat("save");
+        std::regex exit_pat("exit");
         if(std::regex_match(nextMove,move_pat)){
             try{
                 matchfield->move(Coordinates_t(7-(nextMove.at(6)-'1'),nextMove.at(5)-'a'),Coordinates_t(7-(nextMove.at(9)-'1'),nextMove.at(8)-'a'));
@@ -147,8 +154,16 @@ void Controller::startGame(){
             }catch(WrongMoveException ex){// Fehlerhafter Zug
                 view->render(ex.info());
             }catch(GameEndException){//Spielende
+                isRunning=false;
                 view->printVictory();
                 //Save Highscore
+                char input;
+                std::cin >> input;
+                if(input == 'y'){
+                    std::cout<<"Gib einen Namen ein!"<<std::endl;
+                    std::cin>>nextMove;
+                    saveHighscore(nextMove,10);
+                }
             }
         }
         else if(std::regex_match(nextMove,hint_pat)){
@@ -161,6 +176,9 @@ void Controller::startGame(){
             std::cout<<"Gibt einen Namen für die Datei ein:"<<std::endl;
             std::cin>> nextMove;
             saveGame(nextMove);
+        }
+        else if (std::regex_match(nextMove,exit_pat)){
+            isRunning=false;
         }
         else{
             view->render("Falscher Befehl!");

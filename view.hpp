@@ -37,6 +37,16 @@
 
 #include <iostream>
 #include "Matchfield.cpp"
+
+typedef struct s_highscore
+{
+    int score;
+    std::string name;
+    std::string time;
+    s_highscore(std::string playerName, int score,std::string time):score(score),name(playerName),time(time){}
+}Highscore;
+
+
 //Handle all Output while a Game is running
 class View
 {
@@ -58,6 +68,7 @@ public:
     void printAutosaveFound();
     void printVictory();
     void printField();
+    void printHighscore(std::vector<Highscore> highscores);
     
 };
 

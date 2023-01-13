@@ -68,7 +68,7 @@ void View::printHelp(){
 
 void View::printMenu(){
     CLEARCONSOLE
-    std::cout<< "Menü:"<<std::endl<<"1: Beginne neues Spiel."<<std::endl<<"2: Lade gespeichertes Spiel."<<std::endl<<"3: Verlasse das Programm."<<std::endl;
+    std::cout<< "Menü:"<<std::endl<<"1: Beginne neues Spiel."<<std::endl<<"2: Lade gespeichertes Spiel."<<std::endl<<"3: Verlasse das Programm."<<std::endl<<"4: Zeige die Highscores an."<<std::endl;
 }
 
 void View::printAutosaveFound(){
@@ -79,7 +79,8 @@ void View::printVictory(){
     CLEARCONSOLE
     std::cout << "Das Spiel ist entschieden!"<<std::endl;
     printField();
-    std::cout << "Spieler " << (*gamefield)->getActualPlayer()<< " hat gewonnen!" <<std::endl;
+    std::cout << "Spieler " << (*gamefield)->getActualPlayer()<< " hat gewonnen!" <<std::endl
+    << "Es wurden "<< "Züge gebraucht. Möchtest du einen Highscoreeintrag? y/n"<<std::endl;
 }
 
 void View::printField(){
@@ -110,6 +111,13 @@ void View::printField(){
         std::cout <<8-x<< std::endl;
     }
     std::cout << " a b c d e f g h"<<std::endl;
+}
+
+void View::printHighscore(std::vector<Highscore> highscores){
+    CLEARCONSOLE
+    for(Highscore highscore:highscores){
+        std::cout << highscore.time <<"  "<< highscore.score<< "   " << highscore.name<< std::endl;
+    }
 }
 
 #endif // VIEW
