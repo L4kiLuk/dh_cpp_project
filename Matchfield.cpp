@@ -47,11 +47,11 @@ void Matchfield::move(Coordinates_t from, Coordinates_t to){
         }
 
         //weiß zu Dame
-        if(field[from.x][from.y]->black==false &&  field[from.x][from.y]->state==false && actualPlayer == 0 && from.y == 1 && to.y ==0){
+        if(field[from.x][from.y]->black==false &&  field[from.x][from.y]->state==false && actualPlayer == 1 && from.x == 1 && to.x ==0){
             field[from.x][from.y]-> state = true;
         }
         //schwarz zu Dame 
-        else if(field[from.x][from.y]->black==true &&  field[from.x][from.y]->state==false && actualPlayer == 1 && from.y == 6 && to.y ==7){
+        else if(field[from.x][from.y]->black==true &&  field[from.x][from.y]->state==false && actualPlayer == 0 && from.x == 6 && to.x ==7){
             field[from.x][from.y]-> state = true;
         }
         //black -> nach unten
