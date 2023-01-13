@@ -152,25 +152,25 @@ std::vector<Coordinates> Matchfield::hint(Coordinates_t from, bool beat_only){
     
     //schwarz normal
     if(from.x<7&&from.y>0){
-        if(field[from.x][from.y]->state==false&&field[from.x][from.y]->black==false&&field[from.x+1][from.y-1]==NULL){
+        if(field[from.x][from.y]->state==false&&field[from.x][from.y]->black==true&&field[from.x+1][from.y-1]==NULL){
             vector.push_back(Coordinates_t(from.x+1, from.y-1));
         }
     }
-    if(from.x>0&&from.y>0){
-        if(field[from.x][from.y]->state==false&&field[from.x][from.y]->black==false&&field[from.x-1][from.y-1]==NULL){
-            vector.push_back(Coordinates_t(from.x-1, from.y-1));
-        }
-    }
-    
-    //weiß normal
     if(from.x<7&&from.y<7){
         if(field[from.x][from.y]->state==false&&field[from.x][from.y]->black==true&&field[from.x+1][from.y+1]==NULL){
             vector.push_back(Coordinates_t(from.x+1, from.y+1));
         }
     }
-    if(from.x>0&&from.y<7){
-        if(field[from.x][from.y]->state==false&&field[from.x][from.y]->black==true&&field[from.x-1][from.y+1]==NULL){
+    
+    //weiß normal
+    if(from.x<7&&from.y<7){
+        if(field[from.x][from.y]->state==false&&field[from.x][from.y]->black==false&&field[from.x-1][from.y+1]==NULL){
             vector.push_back(Coordinates_t(from.x-1, from.y+1));
+        }
+    }
+    if(from.x>0&&from.y>0){
+        if(field[from.x][from.y]->state==false&&field[from.x][from.y]->black==false&&field[from.x-1][from.y-1]==NULL){
+            vector.push_back(Coordinates_t(from.x-1, from.y-1));
         }
     }
     
