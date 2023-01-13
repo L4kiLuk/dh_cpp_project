@@ -93,7 +93,7 @@ void Controller::loadGame(std::string file){
         }
     }
     ifs.close();
-    if(file.compare(AUTOSAVEFILE)){
+    if(!file.compare(AUTOSAVEFILE)){
         std::remove(AUTOSAVEFILE);
     }
     startGame();
