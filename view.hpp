@@ -21,19 +21,6 @@
 #define WHITEDAME "11" 
 #define HINTSTONE "00" 
 #endif
-/*
-  0   0   0   0 
-0   0   0   0   
-  0   0   0   0 
-                
-                
-1   1   1   1   
-  1   1   1   1 
-1   1   1   1   
-⎡      ⎤
-⎢      ⎥
-⎣      ⎦
-*/
 
 #include <iostream>
 #include "Matchfield.cpp"
@@ -46,7 +33,6 @@ typedef struct s_highscore
     s_highscore(std::string playerName, int score,std::string time):score(score),name(playerName),time(time){}
 }Highscore;
 
-
 //Handle all Output while a Game is running
 class View
 {
@@ -54,7 +40,6 @@ private:
     /* data */
     Matchfield** gamefield;
 
-    
 public:
     View(Matchfield** ptr_gamefield): gamefield(ptr_gamefield){};
     void render();
@@ -70,7 +55,5 @@ public:
     void printLine(std::string line);
     
 };
-
-
 
 #endif // VIEWH

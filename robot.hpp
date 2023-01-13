@@ -24,8 +24,4 @@ public:
     std::vector<PossibleMove> findMoves(PossibleMove from,int heading);
 };
 
-
-
-
-
 #endif // HROBOT

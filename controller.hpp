@@ -29,4 +29,5 @@ public:
     std::vector<Highscore> loadHighscores(); 
 };
     void signal_handler(int signal);
+    
 #endif // HCONTROLLER

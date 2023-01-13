@@ -115,5 +115,4 @@ std::vector<PossibleMove> Robot::findMoves(PossibleMove posMove,int heading){
     return moves;
 }
 
-
 #endif // ROBOT

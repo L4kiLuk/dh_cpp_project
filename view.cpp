@@ -121,4 +121,5 @@ void View::printHighscore(std::vector<Highscore> highscores){
 void View::printLine(std::string line){
     std::cout<<line<<std::endl;
 }
+
 #endif // VIEW
