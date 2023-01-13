@@ -62,21 +62,26 @@ void View::render(std::string message, std::vector<Coordinates> hints){
 }
 //Prints the welcome message
 void View::printWelcomeMessage(){
-    std::cout << "Willkommen zu Dame. \n Wir freuen uns, dass du unser Spiel spielen willst. \n Wenn du Hilfe brauchst, schreibe einfach \"help\".\n";
+    std::cout << "Willkommen zu Dame. \n Wir freuen uns, dass du unser Spiel spielen willst. \n Während des Spiels kannst du mit help die Hilfe ansehen\n";
 }
 //Prints the help
 void View::printHelp(){
     std::cout   << "help" << std::endl
                 << "    Zeige diese Hilfe an." << std::endl
-                << "move <fromx><fromy> <tox><toy> (move a3 b4)" << std::endl
+                << "move <fromCol><fromRow> <toCol><toRow> (move a3 b4)" << std::endl
                 << "    Ziehe einen Stein an eine andere Position." << std::endl
-                << "hint <fromx><fromy>" << std::endl
+                << "hint <fromCol><fromRow>" << std::endl
                 << "    Lass dir die Möglichen Zuge eines Steines anzeigen" << std::endl
+                << "save" << std::endl
+                << "    Speichere den aktuellen Spielstand in eine Datei" << std::endl
+                << "exit" << std::endl
+                << "    Gehe zu Menü ohne zu speichern" << std::endl
                 << "Sollte es Probleme bei der Darstellung des Spielfeldes geben, dann passe bitte die Datei view.hpp an."<<std::endl;
 }
 //Prints the menu
 void View::printMenu(){
     CLEARCONSOLE
+    printWelcomeMessage();
     std::cout<< "Menü:"<<std::endl<<"1: Beginne neues Spiel."<<std::endl<<"2: Lade gespeichertes Spiel."<<std::endl<<"3: Verlasse das Programm."<<std::endl<<"4: Zeige die Highscores an."<<std::endl;
 }
 //Prints autosave found message
