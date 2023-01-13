@@ -4,6 +4,8 @@
 #include <iostream>
 #include <regex>
 #include <fstream>
+#include <thread>
+#include <chrono>
 #include "controller.hpp"
 #include "view.cpp"
 #include "robot.cpp"
@@ -141,6 +143,7 @@ void Controller::startGame(){
                 matchfield->move(Coordinates_t(7-(inputString.at(6)-'1'),inputString.at(5)-'a'),Coordinates_t(7-(inputString.at(9)-'1'),inputString.at(8)-'a'));
                 view->render("Zug erfolgreich!");
                 if(withComputer&&matchfield->getActualPlayer()==0){
+                    std::this_thread::sleep_for(std::chrono::seconds(1));
                     robot.nextMove();
                     view->render("Zug erfolgreich!");
                 }
