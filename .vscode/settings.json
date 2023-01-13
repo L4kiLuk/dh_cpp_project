@@ -58,5 +58,6 @@
         "regex": "cpp",
         "shared_mutex": "cpp",
         "csignal": "cpp"
-    }
+    },
+    "cSpell.language": "en",
 }
