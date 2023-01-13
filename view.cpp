@@ -15,15 +15,21 @@ void View::render(std::string message){
 }
 //Print the field including hint stones
 void View::render(std::string message, std::vector<Coordinates> hints){
+    CLEARCONSOLE
     std::cout << " a b c d e f g h"<<std::endl;
     for(int column=0;column<8;column++){
         std::cout << 8-column;
         for(int row=0;row<8;row++){
+            bool aHintPrinted = false;
             for(Coordinates coord:hints){
                 if(coord.x==column&&coord.y==row){
-                    std::cout <<EMPTYBLACKFIELD;
-                    continue;
+                    std::cout <<HINTSTONE;
+                    aHintPrinted=true;
+                    break;
                 }
+            }
+            if(aHintPrinted){
+                continue;
             }
             if((*gamefield)->field[column][row]==NULL){
                 if((column+row)%2){
@@ -31,18 +37,23 @@ void View::render(std::string message, std::vector<Coordinates> hints){
                 }else{
                     std::cout <<EMPTYWHITEFIELD;
                 }
-            }else if((*gamefield)->field[column][row]->black){
+                continue;
+            }
+            if((*gamefield)->field[column][row]->black){
                 if((*gamefield)->field[column][row]->state){
                     std::cout << BLACKDAME;
                 }else{
                     std::cout <<BLACKSTONE;
                 }
-            }else{
+                continue;
+            }
+            if(!(*gamefield)->field[column][row]->black){
                 if((*gamefield)->field[column][row]->state){
                     std::cout << WHITEDAME;
                 }else{
                     std::cout <<WHITESTONE;
                 }
+                continue;
             }
         }
         std::cout <<8-column<< std::endl;
@@ -83,30 +94,35 @@ void View::printVictory(){
 //Prints the field without anything else
 void View::printField(){
     std::cout << " a b c d e f g h"<<std::endl;
-    for(int x=0;x<8;x++){
-        std::cout << 8-x;
-        for(int y=0;y<8;y++){
-            if((*gamefield)->field[x][y]==NULL){
-                if((x+y)%2){
+    for(int column=0;column<8;column++){
+        std::cout << 8-column;
+        for(int row=0;row<8;row++){
+            if((*gamefield)->field[column][row]==NULL){
+                if((column+row)%2){
                     std::cout <<EMPTYBLACKFIELD; 
                 }else{
                     std::cout <<EMPTYWHITEFIELD;
                 }
-            }else if((*gamefield)->field[x][y]->black){
-                if((*gamefield)->field[x][y]->state){
+                continue;
+            }
+            if((*gamefield)->field[column][row]->black){
+                if((*gamefield)->field[column][row]->state){
                     std::cout << BLACKDAME;
                 }else{
                     std::cout <<BLACKSTONE;
                 }
-            }else{
-                if((*gamefield)->field[x][y]->state){
+                continue;
+            }
+            if(!(*gamefield)->field[column][row]->black){
+                if((*gamefield)->field[column][row]->state){
                     std::cout << WHITEDAME;
                 }else{
                     std::cout <<WHITESTONE;
                 }
+                continue;
             }
         }
-        std::cout <<8-x<< std::endl;
+        std::cout <<8-column<< std::endl;
     }
     std::cout << " a b c d e f g h"<<std::endl;
 }
