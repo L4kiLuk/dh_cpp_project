@@ -6,11 +6,11 @@
 #define CLEARCONSOLE std::cout<< u8"\033[2J\033[1;1H";
 #define EMPTYBLACKFIELD "\033[40m  \033[0m"
 #define EMPTYWHITEFIELD "\033[47m  \033[0m"
-#define BLACKSTONE "\033[40;31m⭗ \033[0m" //Zeichen gerne auswechseln, sollte es nicht schön angezeigt werden
-#define WHITESTONE "\033[40;37m⭗ \033[0m" //Zeichen gerne auswechseln, sollte es nicht schön angezeigt werden
+#define BLACKSTONE "\033[40;31mⓄ \033[0m" //Zeichen gerne auswechseln, sollte es nicht schön angezeigt werden
+#define WHITESTONE "\033[40;37mⓄ \033[0m" //Zeichen gerne auswechseln, sollte es nicht schön angezeigt werden
 #define BLACKDAME "\033[40;31mⒹ \033[0m" //Zeichen gerne auswechseln, sollte es nicht schön angezeigt werden
 #define WHITEDAME "\033[40;37mⒹ \033[0m" //Zeichen gerne auswechseln, sollte es nicht schön angezeigt werden
-#define HINTSTONE "\033[40;35m⭗ \033[0m" //Zeichen gerne auswechseln, sollte es nicht schön angezeigt werden
+#define HINTSTONE "\033[40;35mⓄ \033[0m" //Zeichen gerne auswechseln, sollte es nicht schön angezeigt werden
 #else
 #define CLEARCONSOLE 
 #define EMPTYBLACKFIELD "  "
