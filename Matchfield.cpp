@@ -62,6 +62,8 @@ void Matchfield::move(Coordinates_t from, Coordinates_t to){
             field[from.x][from.y] = NULL;
             changeActualPlayer();
             
+        }else if(field[from.x+((to.x-from.x)/2)][from.y+((to.y-from.y)/2)]==NULL){
+            throw WrongMoveException();
         }
         else if(actualPlayer==0 &&(to.x==from.x+2)&&(to.y==from.y-2||to.y==from.y+2)&&field[to.x][to.y]==NULL&& field[from.x+((to.x-from.x)/2)][from.y+((to.y-from.y)/2)]->black==false && field[from.x][from.y]->black==true){
             field[to.x][to.y]=field[from.x][from.y];
@@ -82,6 +84,9 @@ void Matchfield::move(Coordinates_t from, Coordinates_t to){
             field[from.x][from.y]->~Stone();
             field[from.x][from.y] = NULL;
             changeActualPlayer();
+        }
+        else if(field[from.x+((to.x-from.x)/2)][from.y+((to.y-from.y)/2)]==NULL){
+            throw WrongMoveException();
         }
         else if(actualPlayer==1 &&(to.x==from.x-2)&&(to.y==from.y-2||to.y==from.y+2)&&field[to.x][to.y]==NULL&& field[from.x+((to.x-from.x)/2)][from.y+((to.y-from.y)/2)]->black!=field[from.x][from.y]->black && field[from.x][from.y]->black==false){
             field[to.x][to.y]=field[from.x][from.y];
@@ -104,11 +109,9 @@ void Matchfield::move(Coordinates_t from, Coordinates_t to){
                 }
             }
         }
-        
-        //throw WrongMoveException();
-        
-        
-        
+        else{
+            throw WrongMoveException();
+        }
     }
 
 }
